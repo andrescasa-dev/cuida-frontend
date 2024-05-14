@@ -1,6 +1,4 @@
 export default function Home() {
-
-  return (
-    <div>First Commit</div>
-  );
+  const myConst = 123;
+  return <div>First Commit</div>;
 }

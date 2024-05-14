@@ -75,7 +75,7 @@
     @apply bg-background text-foreground;
   }
 
-  .grid-cols-main-layout>* {
+  .grid-cols-main-layout > * {
     grid-column-start: 2;
   }
 }
