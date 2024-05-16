@@ -1,4 +1,11 @@
+import Header from '@/components/sections/Header';
+import Hero from '@/components/sections/Hero';
+
 export default function Home() {
-  const myConst = 123;
-  return <div>First Commit</div>;
+  return (
+    <>
+      <Header /> {/*should be in the layout*/}
+      <Hero />
+    </>
+  );
 }
