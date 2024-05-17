@@ -57,7 +57,14 @@
   body {
     @apply bg-background text-foreground;
   }
-  .grid-cols-main-layout > * {
+}
+
+@layer utilities {
+  .main-layout{
+    @apply grid grid-cols-[minmax(1.25rem,_1fr)_minmax(0px,_75rem)_minmax(1.25rem,_1fr)] sm:grid-cols-[minmax(3.5rem,_1fr)_minmax(0px,_75rem)_minmax(3.5rem,_1fr)];
+  }
+
+  .main-layout > * {
     grid-column-start: 2;
   }
 }

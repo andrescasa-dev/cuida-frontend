@@ -18,9 +18,6 @@ const config = {
       },
     },
     extend: {
-      gridTemplateColumns: {
-        'main-layout': 'minmax(0px, 7.5rem) minmax(0px, 1fr) minmax(0px, 7.5rem)',
-      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
