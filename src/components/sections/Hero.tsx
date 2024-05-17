@@ -1,4 +1,8 @@
-import { Button } from '@/components/ui/button';
+import CTAButton from '../molecules/CTAButton';
+import Icon from '../ui/Icon';
+
+//className="absolute bottom-0 left-0 right-0 mx-auto"
+//.splice(2, 0, );
 
 export default function Hero() {
   const socialProof = [
@@ -7,20 +11,37 @@ export default function Hero() {
     { label: 'Personas Aportando', statistic: '140+' },
     { label: 'Personas Aportando', statistic: '140+' },
   ];
+  const perks = socialProof.map(({ label, statistic }) => (
+    <li
+      className="sm:p-4 p-3 bg-muted rounded-md max-w-fit h-fit"
+      key={crypto.randomUUID()}
+    >
+      <p className="text-[0.68rem] sm:text-base font-medium text-[#7B6A5A]">{label}</p>
+      <h2 className="text-xl sm:text-3xl font-semibold">{statistic}</h2>
+    </li>
+  ));
+
   return (
-    <>
-      <h1 className="scroll-m-20 text-4xl lg:text-7xl font-bold tracking-tight">
-        Transformando vidas animales
+    <section className="grid gap-y-6 md:gap-y-20 relative lg:mx-[86px] mt-4">
+      <h1 className="scroll-m-20 text-[2.5rem] max-w-[8ch] lg:text-7xl lg:leading-[1.18em] leading-[1.18em] font-bold ">
+        Transforma vidas animales
       </h1>
+      <CTAButton href="/">Descubre</CTAButton>
+      <ul className="md:gap-5 md:[&>li:nth-child(3)]:ml-auto flex gap-2 overflow-scroll sm:overflow-hidden">
+        {perks}
+      </ul>
       {/*Usar el image component puede tener costos extra en producción */}
-      <img src="hero_img.png" alt="" /> {/*asegurarse de que tiene el formato adecuado */}
-      <Button>Descubre</Button>
-      {socialProof.map(({ label, statistic }) => (
-        <article className="p-4 bg-muted rounded-md" key={crypto.randomUUID()}>
-          <p>{label}</p>
-          <h2 className="text-3xl font-semibold">{statistic}</h2>
-        </article>
-      ))}
-    </>
+      {/* eslint-disable-next-line*/}
+      <img
+        className="md:absolute md:top-0 md:right-0 md:-z-10"
+        src="hero_img.png"
+        alt=""
+      />
+      {/*asegurarse de que tiene el formato adecuado */}
+      <Icon
+        name="funnyArrow"
+        className="absolute -bottom-14 lg:-bottom-0 lg:-translate-y-1/2 left-0 right-0 mx-auto"
+      />
+    </section>
   );
 }
