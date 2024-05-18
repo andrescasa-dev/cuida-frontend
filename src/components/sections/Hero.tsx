@@ -22,7 +22,7 @@ export default function Hero() {
   ));
 
   return (
-    <section className="grid gap-y-6 md:gap-y-20 relative lg:mx-[86px] mt-4">
+    <section className="grid gap-y-6 md:gap-y-20 relative lg:mx-[86px] mt-4 mb-10 lg:mb-0">
       <h1 className="scroll-m-20 text-[2.5rem] max-w-[8ch] lg:text-7xl lg:leading-[1.18em] leading-[1.18em] font-bold ">
         Transforma vidas animales
       </h1>

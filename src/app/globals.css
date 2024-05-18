@@ -67,4 +67,40 @@
   .main-layout > * {
     grid-column-start: 2;
   }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  .title {
+    @apply font-semibold text-lg text-pretty leading-[1.15]; 
+  
+    @screen md {
+      font-size: 2.375rem; 
+    }
+  }
+
+  .subtitle {
+    @apply text-base font-medium;
+    line-height: 125%;
+
+    @screen md {
+      font-size: 1.562rem;
+    }
+  }
+
+  .base {
+    @apply text-xs text-pretty;
+    line-height: 140%;
+    @screen md {
+      font-size: 1rem;
+    }
+  }
 }
