@@ -3,10 +3,10 @@ import CTAButton from '../molecules/CTAButton';
 
 function ContactUsSection() {
   return (
-    <article className="mt-28 flex flex-col lg:flex-row gap-7">
+    <article className="flex flex-col lg:flex-row gap-7">
       <div className="flex flex-col gap-4 lg:gap-7 md:px-[52px]">
         <h2 className="title">¿Eres un empresa o interesado en ser voluntario?</h2>
-        <p className="base">
+        <p className="base -mt-2 lg:-mt-4">
           Prevenci&oacute;n de la sobrepoblaci&oacute;n de animales, que es una de las
           principales causas de abandono y sufrimiento.
         </p>

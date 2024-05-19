@@ -19,7 +19,7 @@ const icons = {
       />
     </svg>
   ),
-  chevronRight: <ChevronRight className="h-[1.1em]" />,
+  chevronRight: <ChevronRight className="w-[65%] h-[65%]" />,
   funnyArrow: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -83,6 +83,20 @@ const icons = {
       />
     </svg>
   ),
+  copyRight: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="30"
+      height="30"
+      fill="none"
+      viewBox="0 0 30 30"
+    >
+      <path
+        fill="#797979"
+        d="M15 .777C7.29.777.778 7.291.778 15 .778 22.708 7.29 29.222 15 29.222S29.222 22.708 29.222 15C29.222 7.29 22.71.777 15 .777zm0 18.49c1.41 0 2.631-.378 3.261-1.008l2.011 2.013c-1.601 1.6-3.99 1.839-5.272 1.839A7.12 7.12 0 017.89 15 7.12 7.12 0 0115 7.888c1.282 0 3.672.24 5.272 1.84l-2.01 2.01c-.63-.63-1.85-1.005-3.262-1.005-2.313 0-4.267 1.954-4.267 4.267 0 2.312 1.954 4.266 4.267 4.266z"
+      ></path>
+    </svg>
+  ),
 };
 
 type IconNames = keyof typeof icons;
@@ -112,7 +126,7 @@ function Icon({
   return (
     <span
       className={cn(
-        'inline-block overflow-hidden w-[1.375rem] h-[1.375rem] md:w-8 md:h-8',
+        'inline-flex items-center overflow-hidden w-[1.375rem] h-[1.375rem] md:w-8 md:h-8',
         className,
       )}
       aria-hidden={ariaHidden}

@@ -9,7 +9,7 @@ function Footer() {
   };
 
   return (
-    <section className="brake-main-layout main-layout mt-28 bg-muted ">
+    <footer className="main-layout brake-main-layout main-layout mt-28 bg-muted ">
       <div className="grid items-center gap-y-4 grid-cols-3 py-12">
         <div className="flex gap-4 max-md:col-span-2">
           {/* Todo: this is another component */}
@@ -21,21 +21,27 @@ function Footer() {
         </div>
         <ul className="flex flex-col xs:flex-row gap-2 justify-self-end">
           <li>
-            <Icon aria-hidden={false} aria-label="Instagram" name="instagram" />
+            <a href="/">
+              <Icon aria-hidden={false} aria-label="Instagram" name="instagram" />
+            </a>
           </li>
           <li>
-            <Icon aria-hidden={false} aria-label="Facebook" name="facebook" />
+            <a href="/">
+              <Icon aria-hidden={false} aria-label="Facebook" name="facebook" />
+            </a>
           </li>
           <li>
-            <Icon aria-hidden={false} aria-label="Whatsapp" name="whatsapp" />
+            <a href="/">
+              <Icon aria-hidden={false} aria-label="Whatsapp" name="whatsapp" />
+            </a>
           </li>
         </ul>
         <div className="flex gap-2 items-center justify-self-center col-start-1 col-end-[-1] md:col-span-1 md:row-start-1 md:col-start-2">
-          <Icon aria-hidden={true} name="hamburger" />
+          <Icon aria-hidden={true} name="copyRight" />
           <p className="base opacity-50">Copyright</p>
         </div>
       </div>
-    </section>
+    </footer>
   );
 }
 
