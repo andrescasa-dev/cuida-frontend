@@ -68,6 +68,11 @@
     grid-column-start: 2;
   }
 
+  .brake-main-layout {
+    grid-column-start: 1;
+    grid-column-end: -1;
+  }
+
   .sr-only {
     position: absolute;
     width: 1px;
@@ -80,7 +85,7 @@
   }
 
   .title {
-    @apply font-semibold text-lg text-pretty leading-[1.15]; 
+    @apply font-semibold text-xl text-pretty leading-[1.15]; 
   
     @screen md {
       font-size: 2.375rem; 

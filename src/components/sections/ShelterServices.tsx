@@ -24,7 +24,7 @@ function ShelterServices() {
   ];
 
   return (
-    <section className="mt-16 flex gap-20">
+    <section className="mt-28 flex gap-20">
       <div
         id="imageOfServices"
         className="hidden lg:shrink-0 md:block bg-gray-300 rounded-md w-[487px] h-[474px] md:max-lg:h-full"

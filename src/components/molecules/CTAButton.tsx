@@ -5,16 +5,18 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
 function CTAButton({
+  variant,
   children,
   href,
   className,
 }: {
+  variant?: 'secondary';
   children: string;
   href: string;
   className?: string;
 }) {
   return (
-    <Button asChild className={cn('flex gap-1', className)}>
+    <Button asChild variant={variant} className={cn('flex gap-[0.25em]', className)}>
       <Link href={href}>
         {children} <Icon name="chevronRight" />
       </Link>

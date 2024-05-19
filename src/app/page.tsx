@@ -1,3 +1,5 @@
+import ContactUsSection from '@/components/sections/ContactUsSection';
+import Footer from '@/components/sections/Footer';
 import Header from '@/components/sections/Header';
 import HelpingMethods from '@/components/sections/HelpingMethods';
 import Hero from '@/components/sections/Hero';
@@ -10,6 +12,8 @@ export default function Home() {
       <Hero />
       <ShelterServices />
       <HelpingMethods />
+      <ContactUsSection />
+      <Footer />
     </>
   );
 }
