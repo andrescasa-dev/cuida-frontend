@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import HamburgerMenu from '../organisms/HamburgerMenu';
 
 export const pages = [
-  { label: 'Oportunidades', href: '/', id: crypto.randomUUID() },
+  { label: 'Oportunidades', href: '/oportunidades', id: crypto.randomUUID() },
   { label: 'Refugios', href: '/', id: crypto.randomUUID() },
   { label: 'Animales', href: '/', id: crypto.randomUUID() },
   { label: 'Nosotros', href: '/', id: crypto.randomUUID() },
