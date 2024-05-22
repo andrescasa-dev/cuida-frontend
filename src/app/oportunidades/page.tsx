@@ -1,7 +1,18 @@
 import OportunidadCard from '@/components/molecules/OportunidadCard';
+import fetchHelper from '@/lib/fetchHelper';
 import React from 'react';
 
-function page() {
+async function page() {
+  const [error, data] = await fetchHelper(
+    'http://localhost:1337/api/animales?populate[refugio][fields][0]=nombre&populate[refugio][populate][0]=logo',
+  );
+
+  if (error) {
+    console.log(error.message);
+  } else {
+    console.log(JSON.stringify(data, null, 2));
+  }
+
   return (
     <main className="main-layout flex-grow gap-y-10 mt-4">
       <hgroup>
