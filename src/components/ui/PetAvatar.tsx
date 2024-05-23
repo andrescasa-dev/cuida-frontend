@@ -16,27 +16,27 @@ const colors = {
 
 type Colors = keyof typeof colors;
 
-function PetBubble({
+function PetAvatar({
   className,
-  pet,
+  avatarUrl,
   color,
 }: {
   className?: string;
-  pet: PetImages;
+  avatarUrl: string;
   color: Colors;
 }) {
   return (
     <div
       aria-hidden={true}
       className={cn(
-        'overflow-hidden flex justify-center items-end w-5 h-5 md:h-12 md:w-12 border border-black rounded-full',
+        'overflow-hidden flex justify-center items-end border border-black rounded-full',
         colors[color],
         className,
       )}
     >
-      <img className="w-[90%] h-[90%]" src={petImages[pet]} alt="buble dog" />
+      <img className="w-[90%] h-[90%]" src={avatarUrl} alt="buble dog" />
     </div>
   );
 }
 
-export default PetBubble;
+export default PetAvatar;

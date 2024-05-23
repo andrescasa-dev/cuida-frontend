@@ -16,8 +16,8 @@ function CTAButton({
   className?: string;
 }) {
   return (
-    <Button asChild variant={variant} className={cn('flex gap-[0.25em]', className)}>
-      <Link href={href}>
+    <Button asChild variant={variant}>
+      <Link href={href} className={cn('flex gap-[0.25em]', className)}>
         {children} <Icon aria-hidden={true} name="chevronRight" />
       </Link>
     </Button>

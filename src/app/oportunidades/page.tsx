@@ -3,7 +3,7 @@ import OportunidadCard from '@/components/molecules/OportunidadCard';
 import fetchHelper from '@/lib/fetchHelper';
 import React from 'react';
 
-async function page() {
+async function opportunity() {
   // const [error, data] = await fetchHelper(
   //   'http://localhost:1337/api/animales?populate[refugio][fields][0]=nombre&populate[refugio][populate][0]=logo',
   // );
@@ -32,4 +32,4 @@ async function page() {
   );
 }
 
-export default page;
+export default opportunity;

@@ -97,6 +97,20 @@ const icons = {
       ></path>
     </svg>
   ),
+  info: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="13"
+      height="13"
+      fill="none"
+      viewBox="0 0 13 13"
+    >
+      <path
+        fill="#9F9C9C"
+        d="M6.5 0A6.5 6.5 0 1013 6.5 6.507 6.507 0 006.5 0zm0 12A5.5 5.5 0 1112 6.5 5.507 5.507 0 016.5 12zm1-2.5a.5.5 0 01-.5.5 1 1 0 01-1-1V6.5a.5.5 0 010-1 1 1 0 011 1V9a.5.5 0 01.5.5zm-2-5.75a.75.75 0 111.5 0 .75.75 0 01-1.5 0z"
+      ></path>
+    </svg>
+  ),
 };
 
 type IconNames = keyof typeof icons;
