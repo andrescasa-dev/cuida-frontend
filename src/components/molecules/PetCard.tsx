@@ -7,7 +7,7 @@ TODO
 - proper responsive image
 */
 
-function PetCard({ pet, shelter, className }: { className: string; pet; shelter }) {
+function PetCard({ pet, shelter, className }: { className?: string; pet; shelter }) {
   const { photo } = pet;
   return (
     <article
@@ -27,7 +27,9 @@ function PetCard({ pet, shelter, className }: { className: string; pet; shelter 
       </div>
       <div className="flex bg-background rounded-[inherit] rounded-t-none px-5 py-5 justify-between">
         <div>
-          <h3 className="font-medium text-lg uppercase mb-2 sm:font-semibold">Milu</h3>
+          <h3 className="font-medium text-lg uppercase mb-2 sm:font-semibold text-start">
+            Milu
+          </h3>
           <dl className="flex gap-2">
             <dt className="sr-only">Sexo</dt>
             <dd className="font-medium text-xs capitalize lg:text-base text-[#525252] ">
