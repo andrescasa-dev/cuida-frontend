@@ -2,7 +2,7 @@ import CustomPagination from '@/components/molecules/CustomPagination';
 import fetchHelper from '@/lib/fetchHelper';
 import React from 'react';
 import OportunidadCard from '../molecules/OportunidadCard';
-import { OpportunitiesResponse } from '@/types';
+import { OpportunitiesResponse } from '@/types/necessities';
 
 async function OpportunityReel({ url }: { url: string }) {
   const [error, data] = await fetchHelper<OpportunitiesResponse>(

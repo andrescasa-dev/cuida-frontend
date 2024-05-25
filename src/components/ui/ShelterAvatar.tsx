@@ -1,12 +1,19 @@
-import { Shelter } from '@/types';
+import { cn } from '@/lib/utils';
+import { Shelter } from '@/types/necessities';
+
 import Image from 'next/image';
 import React from 'react';
 
-function ShelterAvatar({ shelter }: { shelter: Shelter }) {
+function ShelterAvatar({ shelter, className }: { shelter: Shelter; className?: string }) {
   return (
-    <div className="inline-flex justify-center items-center rounded-full w-14 aspect-square overflow-hidden border border-border">
+    <div
+      className={cn(
+        'inline-flex justify-center items-center rounded-full aspect-square overflow-hidden border border-border',
+        className,
+      )}
+    >
       <Image
-        alt={`foto avatar del refugio: ${shelter.data.attributes.name}`}
+        alt={`foto avatar del refugio: ${shelter.data.attributes.nombre}`}
         src={`${process.env.BACKEND_URL}${shelter.data.attributes.logo.data.attributes.url}`}
         height={58}
         width={58}

@@ -1,8 +1,8 @@
-import { OpportunityData } from '@/types';
 import Image from 'next/image';
 import BadgedPetCount from '../ui/BadgedPetCount';
 import ShelterAvatar from '../ui/ShelterAvatar';
 import Link from 'next/link';
+import { OpportunityData } from '@/types/necessities';
 
 /* Todo
 eliminar defaults
@@ -39,7 +39,7 @@ function OportunidadCard({ opportunity }: { opportunity: OpportunityData }) {
   const totalPets = mascotas_beneficiadas.data.attributes.count;
 
   return (
-    <article className="max-w-[22rem] relative flex gap-4 flex-col justify-end bg-muted rounded-3xl border border-border px-7 pt-11 pb-4 relative">
+    <article className="max-w-[22rem] relative flex gap-4 flex-col justify-end bg-muted rounded-3xl border border-border px-7 pt-11 pb-4">
       <header className="mb-auto">
         <h3 className="font-semibold text-2xl uppercase">{type}</h3>
         <BadgedPetCount
@@ -58,7 +58,7 @@ function OportunidadCard({ opportunity }: { opportunity: OpportunityData }) {
       <p className="base">{description}</p>
       <footer>
         <a className="flex gap-2 items-center font-medium text-lg" href="">
-          <ShelterAvatar shelter={shelter} />
+          <ShelterAvatar className="w-14" shelter={shelter} />
           {shelter.data.attributes.nombre}
         </a>
       </footer>

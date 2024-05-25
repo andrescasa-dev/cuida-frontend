@@ -6,6 +6,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import fetchHelper from '@/lib/fetchHelper';
 import { cn } from '@/lib/utils';
+import { OpportunityResponse } from '@/types/necessity';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -24,7 +25,17 @@ Refactor
 */
 
 async function opportunityDetail({ params }: { params: { opportunityId: string } }) {
-  const necessityDetail = {
+  const [error, data] = await fetchHelper<OpportunityResponse>(
+    `${process.env.BACKEND_URL}/api/necesidades/${params.opportunityId}`,
+  );
+
+  if (error !== undefined) {
+    // por el momento la pagina sigue cargando a pesar de si hay un error en el fetching
+    // todo: manejar correctamente el error del fetch
+    console.error(`error fetching opportunity detail data ${error.message}`);
+  }
+
+  const necessityExample = {
     targetMoth: '2024-04',
     necessities: [
       { id: 1, totalPets: 74, type: 'alimento' },
@@ -89,17 +100,26 @@ async function opportunityDetail({ params }: { params: { opportunityId: string }
       },
     },
   };
-  const { targetMoth, necessities, pets, shelter } = necessityDetail;
+
+  if (data === undefined) {
+    // todo: manejar correctamente el error del fetch
+    return;
+  }
+
+  const shelter = data.data.attributes.refugio;
+  const refugioLogoURL = shelter.data.attributes.logo.data.attributes.url;
+  const refugioLogoAlt = shelter.data.attributes.logo.data.attributes.alternativeText;
+  const month = '2024-04'; // todo: get the current time
 
   return (
     <main className="main-layout mt-4 gap-y-5 sm:gap-y-14">
       <div className="flex flex-col sm:flex-row gap-y-10 sm:items-center sm:mt-5">
         <div className="flex gap-[1em] items-center">
           <Image
-            className="shrink-0 size-14 sm:size-28"
-            src={shelter.logo.url}
+            className="shrink-0 size-14 sm:size-28  rounded-full aspect-square overflow-hidden border border-border"
+            src={`${process.env.BACKEND_URL}${refugioLogoURL}`}
             aria-hidden="true"
-            alt={shelter.logo.alt}
+            alt={refugioLogoAlt}
             height={58}
             width={58}
           />
@@ -121,13 +141,13 @@ async function opportunityDetail({ params }: { params: { opportunityId: string }
             <h2 className="font-semibold text-lg sm:text-[1.375rem] ">Gastos del més</h2>
             <time
               className="font-medium text-sm sm:text-base text-muted-text"
-              dateTime={targetMoth}
+              dateTime={month}
             >
-              04-2024
+              {month}
             </time>
           </hgroup>
           <div className="grid xs:grid-cols-2 xs:grid-rows-3 sm:grid-rows-2 gap-4 sm:max-w-lg md:grid-rows-4 md:grid-cols-1">
-            {necessities.map((necessity) => (
+            {necessityExample.necessities.map((necessity) => (
               <article
                 key={necessity.id}
                 className={cn(
@@ -171,7 +191,9 @@ async function opportunityDetail({ params }: { params: { opportunityId: string }
                   >
                     mascotas
                   </dt>
-                  <dd className="font-medium text-base">{necessities[0].totalPets}</dd>
+                  <dd className="font-medium text-base">
+                    {necessityExample.necessities[0].totalPets}
+                  </dd>
                 </dl>
               </article>
             ))}
@@ -183,8 +205,13 @@ async function opportunityDetail({ params }: { params: { opportunityId: string }
           </h2>
           <ScrollArea className="w-full pb-4">
             <div className="flex gap-2">
-              {pets.map((pet) => (
-                <PetCard key={pet.id} className="shrink-0" pet={pet} shelter={shelter} />
+              {necessityExample.pets.map((pet) => (
+                <PetCard
+                  key={pet.id}
+                  className="shrink-0"
+                  pet={pet}
+                  shelter={necessityExample.shelter}
+                />
               ))}
             </div>
             <ScrollBar orientation="horizontal" />
