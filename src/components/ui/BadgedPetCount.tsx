@@ -11,7 +11,7 @@ function BadgedPetCount({
   return (
     <dl
       className={cn(
-        'px-[0.75em] py-[1.25em] flex flex-col border border-border rounded-br-[0.5em] rounded-bl-[0.5em] bg-background',
+        'px-[0.75em] py-[1.25em] flex flex-col border border-border border-t-0 rounded-br-[0.5em] rounded-bl-[0.5em] bg-background',
         className,
       )}
     >
