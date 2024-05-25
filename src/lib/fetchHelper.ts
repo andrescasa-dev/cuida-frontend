@@ -1,4 +1,6 @@
-export default async function fetchHelper(url: string) {
+type Response<T> = [Error] | [undefined, T];
+
+export default async function fetchHelper<T>(url: string): Promise<Response<T>> {
   try {
     const response = await fetch(url);
     if (!response.ok) {

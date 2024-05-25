@@ -5,15 +5,16 @@ import OportunidadCard from '../molecules/OportunidadCard';
 import { OpportunitiesResponse } from '@/types';
 
 async function OpportunityReel({ url }: { url: string }) {
-  const responseNoTypes = await fetchHelper(`${process.env.BACKEND_URL}${url}`);
-  const [error, response] = responseNoTypes as [Error, OpportunitiesResponse]; // Factorizar
+  const [error, data] = await fetchHelper<OpportunitiesResponse>(
+    `${process.env.BACKEND_URL}${url}`,
+  );
 
-  if (error) {
+  if (error !== undefined) {
     console.error(`Erro while fetching data: ${error.message}`);
     return;
   }
 
-  const { data: opportunities } = response;
+  const { data: opportunities } = data;
 
   return (
     <>
