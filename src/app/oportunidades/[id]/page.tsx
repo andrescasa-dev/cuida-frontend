@@ -24,9 +24,9 @@ Refactor
 - text muted se repite
 */
 
-async function opportunityDetail({ params }: { params: { opportunityId: string } }) {
+async function opportunityDetail({ params }: { params: { id: string } }) {
   const [error, data] = await fetchHelper<OpportunityResponse>(
-    `${process.env.BACKEND_URL}/api/necesidades/${params.opportunityId}`,
+    `${process.env.BACKEND_URL}/api/necesidades/${params.id}`,
   );
 
   if (error !== undefined) {
