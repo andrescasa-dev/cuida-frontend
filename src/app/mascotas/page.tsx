@@ -1,124 +1,21 @@
 import CustomPagination from '@/components/molecules/CustomPagination';
 import ModalAdoption from '@/components/organisms/ModalAdoption';
 
-function page() {
-  const pets = [
-    {
-      id: 1,
-      name: 'milu',
-      sex: 'hembra',
-      ageString: 'Joven',
-      size: 'mediana',
-      story:
-        'Milo es afectuosa y leal, siempre buscando afecto. Alegre y esperanzada, ilumina el refugio con su energía positiva. Lista para amar y ser amada en un hogar lleno de cariño.',
-      personality: ['juguetona', 'cariñosa', 'protectora'],
-      ailments: ['desnutrición', 'dermatitis', 'parasitos'],
-      photo: {
-        url: '/dog2-removebg-preview.png',
-        alt: 'a dog',
-      },
-      shelter: {
-        id: 1,
-        contactNumber: 3166229648,
-        logo: {
-          url: '/La_Tropa_Gatuna_De_Yanet 1.png',
-          alt: 'logo',
-        },
-      },
-    },
-    {
-      id: 1,
-      name: 'milu',
-      sex: 'hembra',
-      ageString: 'Joven',
-      size: 'mediana',
-      story:
-        'Milo es afectuosa y leal, siempre buscando afecto. Alegre y esperanzada, ilumina el refugio con su energía positiva. Lista para amar y ser amada en un hogar lleno de cariño.',
-      personality: ['juguetona', 'cariñosa', 'protectora'],
-      ailments: ['desnutrición', 'dermatitis', 'parasitos'],
-      photo: {
-        url: '/dog2-removebg-preview.png',
-        alt: 'a dog',
-      },
-      shelter: {
-        id: 1,
-        contactNumber: 3166229648,
-        logo: {
-          url: '/La_Tropa_Gatuna_De_Yanet 1.png',
-          alt: 'logo',
-        },
-      },
-    },
-    {
-      id: 1,
-      name: 'milu',
-      sex: 'hembra',
-      ageString: 'Joven',
-      size: 'mediana',
-      story:
-        'Milo es afectuosa y leal, siempre buscando afecto. Alegre y esperanzada, ilumina el refugio con su energía positiva. Lista para amar y ser amada en un hogar lleno de cariño.',
-      personality: ['juguetona', 'cariñosa', 'protectora'],
-      ailments: ['desnutrición', 'dermatitis', 'parasitos'],
-      photo: {
-        url: '/dog2-removebg-preview.png',
-        alt: 'a dog',
-      },
-      shelter: {
-        id: 1,
-        contactNumber: 3166229648,
-        logo: {
-          url: '/La_Tropa_Gatuna_De_Yanet 1.png',
-          alt: 'logo',
-        },
-      },
-    },
-    {
-      id: 1,
-      name: 'milu',
-      sex: 'hembra',
-      ageString: 'Joven',
-      size: 'mediana',
-      story:
-        'Milo es afectuosa y leal, siempre buscando afecto. Alegre y esperanzada, ilumina el refugio con su energía positiva. Lista para amar y ser amada en un hogar lleno de cariño.',
-      personality: ['juguetona', 'cariñosa', 'protectora'],
-      ailments: ['desnutrición', 'dermatitis', 'parasitos'],
-      photo: {
-        url: '/dog2-removebg-preview.png',
-        alt: 'a dog',
-      },
-      shelter: {
-        id: 1,
-        contactNumber: 3166229648,
-        logo: {
-          url: '/La_Tropa_Gatuna_De_Yanet 1.png',
-          alt: 'logo',
-        },
-      },
-    },
-    {
-      id: 1,
-      name: 'milu',
-      sex: 'hembra',
-      ageString: 'Joven',
-      size: 'mediana',
-      story:
-        'Milo es afectuosa y leal, siempre buscando afecto. Alegre y esperanzada, ilumina el refugio con su energía positiva. Lista para amar y ser amada en un hogar lleno de cariño.',
-      personality: ['juguetona', 'cariñosa', 'protectora'],
-      ailments: ['desnutrición', 'dermatitis', 'parasitos'],
-      photo: {
-        url: '/dog2-removebg-preview.png',
-        alt: 'a dog',
-      },
-      shelter: {
-        id: 1,
-        contactNumber: 3166229648,
-        logo: {
-          url: '/La_Tropa_Gatuna_De_Yanet 1.png',
-          alt: 'logo',
-        },
-      },
-    },
-  ];
+import fetchHelper from '@/lib/fetchHelper';
+import { PetsResponse } from '@/types/animals';
+
+async function page() {
+  const [errorPetsFetch, petsData] = await fetchHelper<PetsResponse>(
+    `${process.env.BACKEND_URL}/api/animales`,
+  );
+
+  if (errorPetsFetch !== undefined) {
+    console.error(`error fetching opportunity detail data ${errorPetsFetch.message}`);
+    return;
+  }
+
+  const pets = petsData.data;
+
   return (
     <main className="main-layout flex-grow gap-y-10 mt-4">
       <hgroup>

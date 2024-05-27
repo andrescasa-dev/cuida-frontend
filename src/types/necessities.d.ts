@@ -1,61 +1,44 @@
 export interface Logo {
   id: number;
-  attributes: {
-    name: string;
-    alternativeText: string;
-    caption: string;
-    url: string;
-  };
+  name: string;
+  alternativeText: string;
+  caption: string;
+  url: string;
 }
 
 export interface Shelter {
-  data: {
-    id: number;
-    attributes: {
-      nombre: string;
-      slug: string;
-      logo: {
-        data: Logo;
-      };
-    };
-  };
-}
-
-export interface BenefitedPets {
-  data: {
-    attributes: {
-      count: number;
-    };
-  };
-}
-
-export interface OpportunityAttributes {
-  titulo: string;
-  tipo: 'Alimento';
-  descripcion: string;
-  metaDinero: string;
-  estado: string;
-  refugio: Shelter;
-  mascotas_beneficiadas: BenefitedPets;
-}
-
-export interface OpportunityData {
   id: number;
-  attributes: OpportunityAttributes;
+  nombre: string;
+  slug: string;
+  logo: Logo;
 }
 
-export interface Pagination {
-  page: number;
-  pageSize: number;
-  pageCount: number;
-  total: number;
+export interface SupportingDocument {
+  id: number;
+  url: string;
 }
 
-export interface Meta {
-  pagination: Pagination;
+export interface BenefitedPet {
+  id: number;
+  nombre: string;
+  slug: string;
+}
+
+export interface Opportunity {
+  id: number;
+  titulo: string;
+  tipo: 'Medicamento' | 'Alimento' | 'Cirugía';
+  descripcion: string;
+  fecha_inicio: string | null;
+  fecha_fin: string | null;
+  meta_dinero: string;
+  estado: string;
+  documento_soporte: SupportingDocument[] | null;
+  refugio: Shelter;
+  mascotas_beneficiadas: BenefitedPet[];
+  total_mascotas_beneficiadas: number;
 }
 
 export interface OpportunitiesResponse {
-  data: OpportunityData[];
-  meta: Meta;
+  data: Opportunity[];
 }

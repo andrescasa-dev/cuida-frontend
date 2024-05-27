@@ -2,19 +2,7 @@ import Image from 'next/image';
 import BadgedPetCount from '../ui/BadgedPetCount';
 import ShelterAvatar from '../ui/ShelterAvatar';
 import Link from 'next/link';
-import { OpportunityData } from '@/types/necessities';
-
-/* Todo
-eliminar defaults
--[x] design analisis
--[x] semantic murk up
--[] desktop
--[] responsive
-  -[] desktop
-  -[] tablet  
--[] sacar el ejemplo a done se va a hacer el fetch de datos
--[] agregar textos de la card al design system
-*/
+import { Opportunity } from '@/types/necessities';
 
 const opportunityImages = {
   Alimento: {
@@ -25,18 +13,23 @@ const opportunityImages = {
     url: '/alimento.png',
     alt: 'bulto de alimento para mascotas',
   },
+  Medicamento: {
+    url: '/alimento.png',
+    alt: 'bulto de alimento para mascotas',
+  },
 };
 
-function OportunidadCard({ opportunity }: { opportunity: OpportunityData }) {
+function OportunidadCard({ opportunity }: { opportunity: Opportunity }) {
   const {
-    mascotas_beneficiadas,
     refugio: shelter,
     descripcion: description,
     tipo: type,
-  } = opportunity.attributes;
+    total_mascotas_beneficiadas,
+  } = opportunity;
 
-  const opportunityImage = opportunityImages[type];
-  const totalPets = mascotas_beneficiadas.data.attributes.count;
+  const { nombre: nombreRefugio, id: shelterId } = shelter;
+  const { url: cardImgUrl, alt: cardImgAlt } = opportunityImages[type];
+  const totalPets = total_mascotas_beneficiadas;
 
   return (
     <article className="max-w-[22rem] relative flex gap-4 flex-col justify-end bg-muted rounded-3xl border border-border px-7 pt-11 pb-4">
@@ -48,24 +41,22 @@ function OportunidadCard({ opportunity }: { opportunity: OpportunityData }) {
         />
       </header>
       <div className="flex justify-center">
-        <Image
-          src={opportunityImage.url}
-          alt={opportunityImage.alt}
-          height={205}
-          width={205}
-        />
+        <Image src={cardImgUrl} alt={cardImgAlt} height={205} width={205} />
       </div>
       <p className="base">{description}</p>
       <footer>
-        <a className="flex gap-2 items-center font-medium text-lg" href="">
+        <a
+          className="flex gap-2 items-center font-medium text-lg"
+          href={`/refugios/${shelterId}`}
+        >
           <ShelterAvatar className="w-14" shelter={shelter} />
-          {shelter.data.attributes.nombre}
+          {nombreRefugio}
         </a>
       </footer>
       <Link
         className="opacity-0 after:absolute after:inset-0 after:z-10"
         aria-label="ir a el detalle de la oportunidad"
-        href={'oportunidades/1'}
+        href={`oportunidades/${shelterId}`}
       />
     </article>
   );

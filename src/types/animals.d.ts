@@ -1,91 +1,56 @@
-export interface PhotoAttributes {
+export interface Photo {
+  id: number;
   name: string;
   alternativeText: string;
   caption: string | null;
   url: string;
 }
 
-export interface PhotoData {
+export interface Representative {
   id: number;
-  attributes: PhotoAttributes;
+  nombre: string;
+  tipo_documento: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  num_documento: string | null;
+  numero_celular: string | null;
+  datos_contacto: string | null;
 }
 
-export interface Photos {
-  data: PhotoData[];
-}
-
-export interface LogoAttributes {
+export interface Logo {
+  id: number;
   name: string;
   alternativeText: string;
   caption: string;
   url: string;
 }
 
-export interface LogoData {
+export interface Shelter {
   id: number;
-  attributes: LogoAttributes;
-}
-
-export interface RepresentativeAttributes {
-  numContacto: string;
-}
-
-export interface RepresentativeData {
-  id: number;
-  attributes: RepresentativeAttributes;
-}
-
-export interface ShelterAttributes {
   nombre: string;
   slug: string;
-  logo: {
-    data: LogoData;
-  };
-  representante: {
-    data: RepresentativeData;
-  };
+  logo: Logo;
+  representante: Representative;
 }
 
-export interface ShelterData {
+export interface Pet {
   id: number;
-  attributes: ShelterAttributes;
-}
-
-export interface PetAttributes {
   nombre: string;
   slug: string | null;
   sexo: string;
   peso: number;
   edad: number;
   especie: string;
-  personalidad: string | null;
+  personalidad: string[] | null;
   historia: string | null;
   esterilizado: boolean;
-  padecimientos: string[] | null;
+  padecimientos: string[];
   estado: string | null;
-  fotos: Photos;
-  refugio: {
-    data: ShelterData;
-  };
-}
-
-export interface PetData {
-  id: number;
-  attributes: PetAttributes;
-}
-
-export interface Pagination {
-  page: number;
-  pageSize: number;
-  pageCount: number;
-  total: number;
-}
-
-export interface Meta {
-  pagination: Pagination;
+  fotos: Photo[];
+  refugio: Shelter;
 }
 
 export interface PetsResponse {
-  data: PetData[];
-  meta: Meta;
+  data: Pet[];
 }

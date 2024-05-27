@@ -4,13 +4,15 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { useState } from 'react';
 import ModalContentPetDetail from './ModalContentPetDetail';
 import ModalContentPetForm from './ModalContentPetForm';
+import { Pet } from '@/types/animals';
 
-function ModalAdoption({ pet }) {
+function ModalAdoption({ pet }: { pet: Pet }) {
+  const { refugio: shelter } = pet;
   const [isFormOpened, setIsFormOpened] = useState<false | true>(false);
   return (
     <Dialog key={pet.id}>
       <DialogTrigger>
-        <PetCard pet={pet} shelter={pet.shelter} />
+        <PetCard pet={pet} shelter={shelter} />
       </DialogTrigger>
       <DialogContent>
         {isFormOpened ? (

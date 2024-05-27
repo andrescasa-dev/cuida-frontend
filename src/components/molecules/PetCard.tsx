@@ -1,4 +1,5 @@
-import { cn } from '@/lib/utils';
+import { cn, composeUrl, getYouthfulness } from '@/lib/utils';
+import { Pet, Shelter } from '@/types/animals';
 import Image from 'next/image';
 import React from 'react';
 
@@ -7,8 +8,18 @@ TODO
 - proper responsive image
 */
 
-function PetCard({ pet, shelter, className }: { className?: string; pet; shelter? }) {
-  const { photo } = pet;
+function PetCard({
+  pet,
+  shelter,
+  className,
+}: {
+  className?: string;
+  pet: Pet;
+  shelter?: Shelter;
+}) {
+  const { fotos, edad: age } = pet;
+  const youthfulness = getYouthfulness(age);
+  const { alternativeText: PhotoAlt, url: PhotoUrl } = fotos[0];
   return (
     <article
       className={cn(
@@ -19,10 +30,10 @@ function PetCard({ pet, shelter, className }: { className?: string; pet; shelter
       <div className="relative">
         <Image
           className="self-center absolute bottom-0 left-0 right-0 mx-auto size-[7rem] sm:size-[9rem]"
-          src={photo.url}
+          src={composeUrl(PhotoUrl)}
           height={111}
           width={111}
-          alt={photo.alt}
+          alt={PhotoAlt}
         />
       </div>
       <div className="flex bg-background rounded-[inherit] rounded-t-none px-4 pt-1.5 pb-2.5 sm:px-5 sm:py-5 justify-between">
@@ -35,17 +46,17 @@ function PetCard({ pet, shelter, className }: { className?: string; pet; shelter
             <dd className="font-medium text-xs capitalize lg:text-base text-[#525252] ">
               {pet.sexo}
             </dd>
-            <dt className="sr-only">Juventud</dt>
+            <dt className="sr-only">Edad</dt>
             <dd className="font-medium text-xs capitalize lg:text-base text-[#525252]">
-              {pet.juventud}
+              {youthfulness}
             </dd>
           </dl>
         </div>
         {shelter && (
           <Image
-            className="shrink-0 self-center lg:size-12"
-            src={shelter.logo.url}
-            alt={shelter.logo.alt}
+            className="shrink-0 self-center lg:size-12 rounded-full"
+            src={composeUrl(shelter.logo.url)}
+            alt={shelter.logo.alternativeText}
             height={34}
             width={34}
           />

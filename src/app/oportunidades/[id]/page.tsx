@@ -2,114 +2,60 @@ import CTAButton from '@/components/molecules/CTAButton';
 import PetCard from '@/components/molecules/PetCard';
 import Icon from '@/components/ui/Icon';
 import PetAvatar from '@/components/ui/PetAvatar';
-import { buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import fetchHelper from '@/lib/fetchHelper';
-import { cn } from '@/lib/utils';
-import { OpportunityResponse } from '@/types/necessity';
+import { cn, composeUrl } from '@/lib/utils';
+import { PetsResponse } from '@/types/animals';
+import { OpportunitiesResponse } from '@/types/necessities';
+import { ShelterResponse } from '@/types/shelter';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-/*
-Ojo
-- el logo de los refugios deberia ser un svg
-
-Refactor
-- main .layout-main siempre se repite
-- card de necesidad, short variation
-- función para obtener el precio formateado
-- sacar utility class de las font que que usan [mycustomvar]
-- utility class for border radius
-- text muted se repite
-*/
-
 async function opportunityDetail({ params }: { params: { id: string } }) {
-  const [error, data] = await fetchHelper<OpportunityResponse>(
-    `${process.env.BACKEND_URL}/api/necesidades/${params.id}`,
+  const [errorShelterFetch, shelterData] = await fetchHelper<ShelterResponse>(
+    `${process.env.BACKEND_URL}/api/refugios/${params.id}`,
   );
 
-  if (error !== undefined) {
-    // por el momento la pagina sigue cargando a pesar de si hay un error en el fetching
-    // todo: manejar correctamente el error del fetch
-    console.error(`error fetching opportunity detail data ${error.message}`);
-  }
+  const [errorOportunityFetch, opportunityData] =
+    await fetchHelper<OpportunitiesResponse>(
+      `${process.env.BACKEND_URL}/api/necesidades?filters[refugio][id]=${params.id}`,
+    );
 
-  const necessityExample = {
-    targetMoth: '2024-04',
-    necessities: [
-      { id: 1, totalPets: 74, type: 'alimento' },
-      { id: 1, totalPets: 74, type: 'medicina' },
-      {
-        id: 1,
-        totalPets: 74,
-        type: 'cirugia',
-        pets: [
-          {
-            id: 1,
-            photo: {
-              url: '/dog2-removebg-preview.png',
-              alt: 'a dog',
-              name: 'Milu',
-            },
-          },
-          {
-            id: 2,
-            photo: {
-              url: '/dog2-removebg-preview.png',
-              alt: 'a dog',
-              name: 'Milu',
-            },
-          },
-        ],
-      },
-    ],
-    pets: [
-      {
-        id: 1,
-        photo: {
-          url: '/dog2-removebg-preview.png',
-          alt: 'a dog',
-        },
-        sexo: 'hembra',
-        juventud: 'Joven',
-      },
-      {
-        id: 2,
-        photo: {
-          url: '/dog2-removebg-preview.png',
-          alt: 'a dog',
-        },
-        sexo: 'hembra',
-        juventud: 'Joven',
-      },
-      {
-        id: 3,
-        photo: {
-          url: '/dog2-removebg-preview.png',
-          alt: 'a dog',
-        },
-        sexo: 'hembra',
-        juventud: 'Joven',
-      },
-    ],
-    shelter: {
-      logo: {
-        url: '/La_Tropa_Gatuna_De_Yanet 1.png',
-        alt: 'logo',
-      },
-    },
-  };
+  const [errorPetsFetch, petsData] = await fetchHelper<PetsResponse>(
+    `${process.env.BACKEND_URL}/api/animales?filters[refugio][id]=${params.id}`,
+  );
 
-  if (data === undefined) {
-    // todo: manejar correctamente el error del fetch
+  if (errorOportunityFetch !== undefined) {
+    console.error(
+      `error fetching opportunity detail data ${errorOportunityFetch.message}`,
+    );
     return;
   }
 
-  const shelter = data.data.attributes.refugio;
-  const refugioLogoURL = shelter.data.attributes.logo.data.attributes.url;
-  const refugioLogoAlt = shelter.data.attributes.logo.data.attributes.alternativeText;
+  if (errorShelterFetch !== undefined) {
+    console.error(`error fetching shelter detail data ${errorShelterFetch.message}`);
+    return;
+  }
+
+  if (errorPetsFetch !== undefined) {
+    console.error(`error fetching animals detail data ${errorPetsFetch.message}`);
+    return;
+  }
+
+  const pets = petsData.data;
+  const shelter = shelterData.data;
+  const opportunities = opportunityData.data;
+  console.log('pets', pets);
+  console.log('opportunities', opportunities);
+  const {
+    nombre: shelterName,
+    logo: { alternativeText: logoAlt, url: logoUrl },
+  } = shelter;
   const month = '2024-04'; // todo: get the current time
+  const contactNumber = '3224619838'; // replace with the actual contact number
+  const whatsappLink = `https://api.whatsapp.com/send?phone=+57${contactNumber}&text=Hola%2C%20quiero%20donar.`;
 
   return (
     <main className="main-layout mt-4 gap-y-5 sm:gap-y-14">
@@ -117,22 +63,27 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
         <div className="flex gap-[1em] items-center">
           <Image
             className="shrink-0 size-14 sm:size-28  rounded-full aspect-square overflow-hidden border border-border"
-            src={`${process.env.BACKEND_URL}${refugioLogoURL}`}
+            src={composeUrl(logoUrl)}
             aria-hidden="true"
-            alt={refugioLogoAlt}
+            alt={logoAlt}
             height={58}
             width={58}
           />
           <h1 className="font-semibold text-xl xs:text-2xl sm:text-[1.75rem] lg:text-2xl">
-            Fundación La tropa Gatuna de Yanet
+            {shelterName}
           </h1>
         </div>
-        <CTAButton
-          className="flex-grow max-w-none sm:w-56 sm:shrink-0 sm:grow-0 sm:ml-auto"
-          href="#"
-        >
-          Donar
-        </CTAButton>
+        <Button asChild>
+          <a
+            target="_blank"
+            href={whatsappLink}
+            className={
+              'flex gap-[0.25em] flex-grow max-w-none sm:w-56 sm:shrink-0 sm:grow-0 sm:ml-auto'
+            }
+          >
+            Donar <Icon aria-hidden={true} name="chevronRight" />
+          </a>
+        </Button>
       </div>
 
       <div className="flex flex-col md:flex-row gap-[inherit] md:gap-x-6 md:justify-between">
@@ -140,21 +91,21 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
           <hgroup className="flex gap-2 items-center mb-3 sm:mb-5">
             <h2 className="font-semibold text-lg sm:text-[1.375rem] ">Gastos del més</h2>
             <time
-              className="font-medium text-sm sm:text-base text-muted-text"
+              className="font-medium text-sm sm:text-base text-muted-text mt-1"
               dateTime={month}
             >
               {month}
             </time>
           </hgroup>
           <div className="grid xs:grid-cols-2 xs:grid-rows-3 sm:grid-rows-2 gap-4 sm:max-w-lg md:grid-rows-4 md:grid-cols-1">
-            {necessityExample.necessities.map((necessity) => (
+            {opportunities.map((opportunity) => (
               <article
-                key={necessity.id}
+                key={opportunity.id}
                 className={cn(
                   'px-6 py-6 xs:px-3 sm:p-5 border border-border bg-muted rounded-[1.124rem] relative min-h-28 max-h-40 sm:max-h-none sm:flex sm:flex-col sm:gap-4',
                   {
                     'row-span-2 sm:col-start-2 sm:row-start-1 md:col-start-auto md:row-start-auto':
-                      necessity.type === 'cirugia',
+                      opportunity.tipo === 'Cirugía',
                   },
                 )}
               >
@@ -163,21 +114,26 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
                 </h3>
                 <p className="font-semibold text-sm sm:text-base flex items-center gap-1 text-muted-text">
                   200,000$
-                  <a href="">
-                    <Icon
-                      aria-label="ir a documento de rendición de cuentas"
-                      aria-hidden={false}
-                      name="info"
-                    />
-                  </a>
+                  {opportunity.documento_soporte && (
+                    <a
+                      target="_blank"
+                      href={composeUrl(opportunity.documento_soporte[0].url)}
+                    >
+                      <Icon
+                        aria-label="ir a documento de rendición de cuentas"
+                        aria-hidden={false}
+                        name="info"
+                      />
+                    </a>
+                  )}
                 </p>
-                {necessity.pets && (
+                {opportunity.mascotas_beneficiadas && (
                   <ul className="flex -space-x-6 mt-2 ">
-                    {necessity.pets.map((pet) => (
+                    {opportunity.mascotas_beneficiadas.map((pet) => (
                       <li key={pet.id}>
                         <PetAvatar
                           className="size-12 "
-                          avatarUrl={pet.photo.url}
+                          avatarUrl="/dog2-removebg-preview.png" //la api aun no devuelve la foto
                           color="yellow"
                         />
                       </li>
@@ -192,7 +148,7 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
                     mascotas
                   </dt>
                   <dd className="font-medium text-base">
-                    {necessityExample.necessities[0].totalPets}
+                    {opportunity.total_mascotas_beneficiadas}
                   </dd>
                 </dl>
               </article>
@@ -205,13 +161,8 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
           </h2>
           <ScrollArea className="w-full pb-4">
             <div className="flex gap-2">
-              {necessityExample.pets.map((pet) => (
-                <PetCard
-                  key={pet.id}
-                  className="shrink-0"
-                  pet={pet}
-                  shelter={necessityExample.shelter}
-                />
+              {pets.map((pet) => (
+                <PetCard key={pet.id} className="shrink-0" pet={pet} shelter={shelter} />
               ))}
             </div>
             <ScrollBar orientation="horizontal" />

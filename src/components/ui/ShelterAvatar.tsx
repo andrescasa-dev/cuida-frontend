@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React from 'react';
 
 function ShelterAvatar({ shelter, className }: { shelter: Shelter; className?: string }) {
+  const { logo, nombre } = shelter;
   return (
     <div
       className={cn(
@@ -13,8 +14,8 @@ function ShelterAvatar({ shelter, className }: { shelter: Shelter; className?: s
       )}
     >
       <Image
-        alt={`foto avatar del refugio: ${shelter.data.attributes.nombre}`}
-        src={`${process.env.BACKEND_URL}${shelter.data.attributes.logo.data.attributes.url}`}
+        alt={`foto avatar del refugio: ${nombre}`}
+        src={`${process.env.BACKEND_URL}${logo.url}`}
         height={58}
         width={58}
       />

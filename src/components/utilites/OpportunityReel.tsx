@@ -15,6 +15,7 @@ async function OpportunityReel({ url }: { url: string }) {
   }
 
   const { data: opportunities } = data;
+  console.log('opportunities:', opportunities);
 
   return (
     <>
