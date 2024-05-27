@@ -26,7 +26,8 @@
     --ring: 24.6 95% 53.1%;
     --radius: 1rem;
     --border-radius: 0.3rem;
-    --text-muted: 0 0% 47%
+    --text-muted: 0 0% 47%;
+    --body-width: 75rem;
   }
 
   .dark {
@@ -60,11 +61,8 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-
-@layer utilities {
   .main-layout{
-    @apply grid grid-cols-[minmax(1.25rem,_1fr)_minmax(0px,_75rem)_minmax(1.25rem,_1fr)] sm:grid-cols-[minmax(3.5rem,_1fr)_minmax(0px,_75rem)_minmax(3.5rem,_1fr)];
+    @apply grid grid-cols-[minmax(1.25rem,_1fr)_minmax(0px,_75rem)_minmax(1.25rem,_1fr)] sm:grid-cols-[minmax(1.5rem,_1fr)_minmax(0px,_75rem)_minmax(1.5rem,_1fr)] md:grid-cols-[minmax(3.5rem,_1fr)_minmax(0px,_75rem)_minmax(3.5rem,_1fr)];
   }
 
   .main-layout > * {
@@ -75,6 +73,10 @@
     grid-column-start: 1;
     grid-column-end: -1;
   }
+}
+
+@layer utilities {
+  
 
   .sr-only {
     position: absolute;

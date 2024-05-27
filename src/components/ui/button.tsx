@@ -5,15 +5,15 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'max-w-fit rounded-full inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'max-w-fit px-6 py-3 rounded-full inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
         default:
-          'px-[1.4em] py-[1.5em] text-[0.7rem] xs:text-[0.9rem] sm:text-[1.125rem] font-semibold bg-primary text-primary-foreground hover:bg-primary/90 border-[1.2px] border-border shadow-[-2px_2px_0px_0px_hsl(var(--border))] ',
+          'font-semibold bg-primary text-primary-foreground hover:bg-primary/90 border-[1.2px] border-border shadow-[-2px_2px_0px_0px_hsl(var(--border))] ',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         secondary:
-          'px-[1.4em] py-[1.5em] text-[0.7rem] xs:text-[0.9rem] sm:text-[1.125rem] font-semibold bg-muted text-primary-foreground hover:bg-muted/90 border-[1.2px] border-border shadow-[-2px_2px_0px_0px_hsl(var(--border))] ',
+          'font-semibold bg-muted text-primary-foreground hover:bg-muted/90 border-[1.2px] border-border shadow-[-2px_2px_0px_0px_hsl(var(--border))] ',
         outline:
           'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
         ghost: 'hover:bg-accent hover:text-accent-foreground',

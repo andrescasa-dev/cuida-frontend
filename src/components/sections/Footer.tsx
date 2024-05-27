@@ -27,12 +27,12 @@ function Footer() {
           </li>
           <li>
             <a href="/">
-              <Icon aria-hidden={false} aria-label="Facebook" name="facebook" />
+              <Icon aria-hidden={false} aria-label="FaceBook" name="faceBook" />
             </a>
           </li>
           <li>
             <a href="/">
-              <Icon aria-hidden={false} aria-label="Whatsapp" name="whatsapp" />
+              <Icon aria-hidden={false} aria-label="WhatsApp" name="whatsApp" />
             </a>
           </li>
         </ul>

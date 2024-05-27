@@ -50,15 +50,15 @@ async function ShelterPage() {
           <p className="text-base text-center max-w-[36ch]">{description}</p>
           <dl className="grid grid-cols-3 gap-x-1">
             <div className="bg-background px-3 py-3 flex flex-col items-center rounded-input">
-              <dt className="font-bold text-xs">Perros</dt>
+              <dt className="font-medium text-xs">Perros</dt>
               <dd className="font-medium text-lg">{countDogs}</dd>
             </div>
             <div className="bg-background px-3 py-3 flex flex-col items-center rounded-input ">
-              <dt className="font-bold text-xs">Gatos</dt>
+              <dt className="font-medium text-xs">Gatos</dt>
               <dd className="font-medium text-lg">{countCats}</dd>
             </div>
             <div className="bg-background px-3 py-3 flex flex-col items-center rounded-input">
-              <dt className="font-bold text-xs">Total</dt>
+              <dt className="font-medium text-xs">Total</dt>
               <dd className="font-medium text-lg">{totalCount}</dd>
             </div>
           </dl>
@@ -94,15 +94,15 @@ async function ShelterPage() {
           <p className="text-base text-center max-w-[36ch]">{description}</p>
           <dl className="grid grid-cols-3 gap-x-1">
             <div className="bg-white px-3 py-3 flex flex-col items-center rounded-input">
-              <dt className="font-bold text-xs">Perros</dt>
+              <dt className="font-medium text-xs">Perros</dt>
               <dd className="font-medium text-lg">{countDogs}</dd>
             </div>
             <div className="bg-white px-3 py-3 flex flex-col items-center rounded-input ">
-              <dt className="font-bold text-xs">Gatos</dt>
+              <dt className="font-medium text-xs">Gatos</dt>
               <dd className="font-medium text-lg">{countCats}</dd>
             </div>
             <div className="bg-white px-3 py-3 flex flex-col items-center rounded-input">
-              <dt className="font-bold text-xs">Total</dt>
+              <dt className="font-medium text-xs">Total</dt>
               <dd className="font-medium text-lg">{totalCount}</dd>
             </div>
           </dl>
@@ -138,15 +138,15 @@ async function ShelterPage() {
           <p className="text-base text-center max-w-[36ch]">{description}</p>
           <dl className="grid grid-cols-3 gap-x-1">
             <div className="bg-white px-3 py-3 flex flex-col items-center rounded-input">
-              <dt className="font-bold text-xs">Perros</dt>
+              <dt className="font-medium text-xs">Perros</dt>
               <dd className="font-medium text-lg">{countDogs}</dd>
             </div>
             <div className="bg-white px-3 py-3 flex flex-col items-center rounded-input ">
-              <dt className="font-bold text-xs">Gatos</dt>
+              <dt className="font-medium text-xs">Gatos</dt>
               <dd className="font-medium text-lg">{countCats}</dd>
             </div>
             <div className="bg-white px-3 py-3 flex flex-col items-center rounded-input">
-              <dt className="font-bold text-xs">Total</dt>
+              <dt className="font-medium text-xs">Total</dt>
               <dd className="font-medium text-lg">{totalCount}</dd>
             </div>
           </dl>
