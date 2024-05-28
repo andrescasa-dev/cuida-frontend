@@ -3,6 +3,7 @@ import ModalAdoption from '@/components/organisms/ModalAdoption';
 
 import fetchHelper from '@/lib/fetchHelper';
 import { PetsResponse } from '@/types/animals';
+import Link from 'next/link';
 
 async function page() {
   const [errorPetsFetch, petsData] = await fetchHelper<PetsResponse>(
@@ -11,6 +12,11 @@ async function page() {
 
   if (errorPetsFetch !== undefined) {
     console.error(`error fetching opportunity detail data ${errorPetsFetch.message}`);
+    return;
+  }
+
+  if (petsData.data.length === 0) {
+    <div>no pets</div>;
     return;
   }
 
@@ -30,6 +36,7 @@ async function page() {
           <ModalAdoption key={pet.id} pet={pet} />
         ))}
       </div>
+      <Link href={'/animales?page=2'}>change to page 2</Link>
       <CustomPagination />
     </main>
   );

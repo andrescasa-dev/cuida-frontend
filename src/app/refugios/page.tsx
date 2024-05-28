@@ -5,22 +5,6 @@ import { SheltersResponse } from '@/types/shelters';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const refugioExample = {
-  photo: {
-    url: '/La_Tropa_Gatuna_De_Yanet 1.png',
-    alt: 'logo de la tropa gatuna',
-  },
-  title: 'La Tropa Gatuna De Yanet',
-  description:
-    'brindamos refugio y amor a animales necesitados, pero tu apoyo es esencial. ¡Ayúdanos a seguir salvando vidas!',
-  countDogs: '9',
-  countCats: '10',
-  totalCount: '19',
-  facebookUrl: '#',
-  whatsappUrl: '#',
-  instagramUrl: '#',
-};
-
 async function ShelterPage() {
   const [errorPetsFetch, sheltersData] = await fetchHelper<SheltersResponse>(
     `${process.env.BACKEND_URL}/api/refugios`,
@@ -51,7 +35,7 @@ async function ShelterPage() {
           return (
             <article
               key={id}
-              className="px-4 py-12 border-2 border-border rounded-md flex flex-col items-center gap-5 bg-muted max-w-[34rem]"
+              className="px-4 py-12 border-2 border-border rounded-md flex flex-col items-center gap-5 bg-muted max-w-[34rem] relative"
             >
               <Link
                 className="opacity-0 after:absolute after:inset-0 after:z-10"
@@ -85,8 +69,8 @@ async function ShelterPage() {
                 <ul className="flex gap-1">
                   {socialNetworks.map(({ redSocial, url }) => (
                     <li key={redSocial}>
-                      <a href={url}>
-                        <Icon name={redSocial === 'facebook' ? 'faceBook' : redSocial} />
+                      <a target="_blank" href={url}>
+                        <Icon name={redSocial} />
                       </a>
                     </li>
                   ))}

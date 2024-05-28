@@ -52,7 +52,7 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
   } = shelter;
   const month = '2024-04'; // todo: get the current time
   const contactNumber = '3224619838'; // replace with the actual contact number
-  const whatsappLink = `https://api.whatsapp.com/send?phone=+57${contactNumber}&text=Hola%2C%20quiero%20donar.`;
+  const whatsappLink = `https://api.whatsapp.com/send?phone=+57${contactNumber}&text=Hola%2C%20Estoy%20interesado%20en%20donar.`;
 
   return (
     <main className="main-layout mt-4 gap-y-5 sm:gap-y-14">

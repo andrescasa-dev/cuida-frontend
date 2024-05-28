@@ -1,30 +1,44 @@
-import { cn } from '@/lib/utils';
+import { cn, composeUrl } from '@/lib/utils';
 import Image from 'next/image';
 import React from 'react';
 import Icon from '@/components/ui/Icon';
-
-const opportunityExample = {
-  title: 'Alimento',
-  type: 'Alimentos',
-  quantity: 2000,
-  totalPets: 74,
-  photo: {
-    url: '/alimento.png',
-    alt: 'Un plato con purina',
-  },
-};
+import { Opportunity } from '@/types/necessities';
 
 function OpportunityCard({
-  opportunity = opportunityExample,
-  shelter,
+  opportunity,
+  showShelter,
   className,
 }: {
   className?: string;
-  opportunity;
-  shelter?;
+  showShelter?: boolean;
+  opportunity: Opportunity;
 }) {
-  const { photo, title, type, quantity, totalPets } = opportunity;
+  const photoDictionary = {
+    Medicamento: {
+      url: '/alimento.png',
+      alt: 'purina en un plato para mascotas',
+    },
+    Alimento: {
+      url: '/alimento.png',
+      alt: 'purina en un plato para mascotas',
+    },
+    Cirugía: {
+      url: '/alimento.png',
+      alt: 'purina en un plato para mascotas',
+    },
+  };
+
+  const {
+    refugio: shelter,
+    titulo: title,
+    tipo: type,
+    meta_dinero: quantity,
+    total_mascotas_beneficiadas: totalPets,
+  } = opportunity;
+
   const quantityString = quantity + '$';
+
+  const photo = photoDictionary[type];
   return (
     <article
       className={cn(
@@ -57,11 +71,11 @@ function OpportunityCard({
             </dd>
           </dl>
         </div>
-        {shelter && (
+        {showShelter && (
           <Image
-            className="shrink-0 self-center lg:size-12"
-            src={shelter.logo.url}
-            alt={shelter.logo.alt}
+            className="shrink-0 self-center lg:size-12 rounded-full border border-border"
+            src={composeUrl(shelter.logo.url)}
+            alt={shelter.logo.alternativeText}
             height={34}
             width={34}
           />

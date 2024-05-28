@@ -1,79 +1,65 @@
-import CTAButton from '@/components/molecules/CTAButton';
 import OpportunityCard from '@/components/molecules/OpportunityCard';
 import PetCard from '@/components/molecules/PetCard';
 import Icon from '@/components/ui/Icon';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import fetchHelper from '@/lib/fetchHelper';
+import { composeUrl } from '@/lib/utils';
+import { PetsResponse } from '@/types/animals';
+import { OpportunitiesResponse } from '@/types/necessities';
+import { ShelterResponse } from '@/types/shelter';
 import { Files, Sparkle } from 'lucide-react';
 import Image from 'next/image';
 
-const shelterExample = {
-  banner: {
-    bannerUrl: '/womanfeeding.jpg',
-    bannerAlt: 'a woman feeding a pet',
-  },
-  avatar: {
-    avatarUrl: '/La_Tropa_Gatuna_De_Yanet 1.png',
-    avatarAlt: 'logo la tropa gatuna',
-  },
-  title: 'Fundación La tropa Gatuna de Yanet',
-  dogCount: 23,
-  catCount: 23,
-  totalPets: 86,
-  services: ['service1', 'service2', 'service3'],
-  contactPhone: 123,
-  contactMethods: [
-    { type: 'instagram' as const, url: '#' },
-    { type: 'faceBook' as const, url: '#' },
-    { type: 'email' as const, url: '#' },
-    { type: 'whatsApp' as const, url: '#' },
-  ],
-  paymentMethods: [
-    { type: 'nequi', number: 123 },
-    { type: 'Bancolombia', number: 123 },
-  ],
-};
+async function shelterDetail({ params }: { params: { id: string } }) {
+  const [errorShelterFetch, shelterData] = await fetchHelper<ShelterResponse>(
+    `${process.env.BACKEND_URL}/api/refugios/${params.id}`,
+  );
 
-const dummyPet = {
-  name: 'Milu',
-  photo: {
-    url: '/dog2-removebg-preview.png',
-    alt: 'Milu the dog',
-  },
-  sexo: 'Female',
-  juventud: 'Young',
-};
+  if (errorShelterFetch !== undefined) {
+    console.error('error while trying to fetch shelter data', errorShelterFetch.message);
+    return;
+  }
+  const shelter = shelterData.data;
 
-const dummyShelter = {
-  logo: {
-    url: '/La_Tropa_Gatuna_De_Yanet 1.png',
-    alt: 'Shelter logo',
-  },
-};
-
-async function shelterDetail() {
   const {
-    banner,
-    services,
-    title,
-    dogCount,
-    catCount,
-    totalPets,
-    avatar,
-    contactPhone,
-    contactMethods,
-    paymentMethods,
-  } = shelterExample;
-  const { bannerAlt, bannerUrl } = banner;
-  const { avatarAlt, avatarUrl } = avatar;
+    servicios: services,
+    nombre: name,
+    total_perros: dogCount,
+    total_gatos: catCount,
+    total_mascotas: totalPets,
+    logo: avatar,
+    whatsapp: whatsapp,
+    redes: socialNetworks,
+    email,
+    pasarelas: paymentMethods,
+  } = shelter;
+  const contactMethods = [
+    { type: 'email' as const, url: `mailto:${email}`, label: email },
+    {
+      type: 'whatsApp' as const,
+      url: `https://wa.me/${whatsapp}`,
+      label: `+57 ${whatsapp}`,
+    },
+    ...socialNetworks.map((sn) => ({
+      type: sn.redSocial,
+      url: sn.url,
+      label: `@${sn.url
+        .split('/')
+        .reverse()
+        .find((e) => e !== '')}`,
+    })),
+  ];
+  // const { bannerAlt, bannerUrl } = banner;
+  const { alternativeText: avatarAlt, url: avatarUrl } = avatar;
 
   const counters = [
     { type: 'perros', count: dogCount, iconName: 'dog' as const },
     { type: 'gatos', count: catCount, iconName: 'cat' as const },
     { type: 'total', count: totalPets, iconName: 'footPrint' as const },
   ];
-  const donationLink = contactPhone + '#';
+  const donationLink = `https://api.whatsapp.com/send?phone=+57${whatsapp}&text=Hola%2C%20Estoy%20interesado%20en%20donar.`;
   return (
     <div className="main-layout flex-grow relative lg:gap-x-5 lg:grid-cols-[minmax(3.5rem,_1fr)_minmax(0px,_75rem)_minmax(0px,_17.5rem)_minmax(3.5rem,_1fr)]">
       <div
@@ -82,25 +68,26 @@ async function shelterDetail() {
       >
         <Image
           className="object-cover -z-10"
-          src={bannerUrl}
+          src={'/womanfeeding.jpg'}
           fill
           sizes="300px"
-          alt={bannerAlt}
+          alt={'a woman feeding some dogs'}
         />
       </div>
       <main className="mt-4 relative">
         <header className="lg:relative grid gap-y-10 justify-items-center mt-12 sm:mt-16 sm:gap-y-0 sm:grid-cols-[max-content] sm:h-[240px] sm:items-end lg:justify-items-start lg:gap-x-3">
           <div className="size-[112px] sm:size-[168px] relative sm:row-span-3 sm:row-start-1">
             <Image
+              className="rounded-full border border-border"
               aria-hidden={true}
-              src={avatarUrl}
+              src={composeUrl(avatarUrl)}
               alt={avatarAlt}
               sizes="300px"
               fill
             />
           </div>
           <h1 className="font-bold text-xl text-center max-sm:-mt-8 sm:row-start-2 sm:text-2xl capitalize">
-            {title}
+            {name}
           </h1>
           <dl
             className="grid grid-cols-3 gap-1 sm:row-start-3  mx-2"
@@ -128,9 +115,17 @@ async function shelterDetail() {
             ))}
           </ul>
           <div className="flex flex-col w-full  gap-2.5 sm:row-start-2 sm:row-span-2 sm:my-auto sm:h-full sm:justify-center">
-            <CTAButton className="max-w-none " href={donationLink}>
-              Donar
-            </CTAButton>
+            <Button asChild>
+              <a
+                target="_blank"
+                href={donationLink}
+                className={
+                  'flex gap-[0.25em] flex-grow max-w-none sm:w-56 sm:shrink-0 sm:grow-0 sm:ml-auto'
+                }
+              >
+                Donar <Icon aria-hidden={true} name="chevronRight" />
+              </a>
+            </Button>
             <Button className="max-w-none lg:hidden" variant={'secondary'}>
               Ver Pasarelas
             </Button>
@@ -152,10 +147,10 @@ async function shelterDetail() {
             <TabsTrigger value="necesidades">Necesidades</TabsTrigger>
           </TabsList>
           <TabsContent value="mascotas">
-            <PetsTabContent />
+            <PetsTabContent shelterId={params.id} />
           </TabsContent>
           <TabsContent value="necesidades">
-            <OpportunitiesTabContent />
+            <OpportunitiesTabContent shelterId={params.id} />
           </TabsContent>
         </Tabs>
       </main>
@@ -173,12 +168,12 @@ async function shelterDetail() {
         <section>
           <h2 className="text-lg font-semibold mb-4">Pasarelas</h2>
           <ul className="flex flex-col gap-2">
-            {paymentMethods.map(({ number, type }) => (
+            {paymentMethods.map(({ numCuenta: number, metodo: type }) => (
               <li
                 key={type}
                 className="flex gap-2 items-center text-sm capitalize bg-muted rounded-sm py-1"
               >
-                <Files className="size-4" /> {type}
+                <Files className="size-4" /> {number}
               </li>
             ))}
           </ul>
@@ -186,10 +181,14 @@ async function shelterDetail() {
         <section>
           <h2 className="text-lg font-semibold mb-4">Contacto</h2>
           <ul className="flex flex-col gap-2">
-            {contactMethods.map(({ type, url }) => (
+            {contactMethods.map(({ type, url, label }) => (
               <li key={type}>
-                <a className="flex gap-2 items-center text-sm capitalize" href={url}>
-                  <Icon name={type} /> {'name'}
+                <a
+                  target="_blank"
+                  className="flex gap-2 items-center text-sm capitalize"
+                  href={url}
+                >
+                  <Icon name={type} /> {label}
                 </a>
               </li>
             ))}
@@ -200,23 +199,51 @@ async function shelterDetail() {
   );
 }
 
-function PetsTabContent() {
+async function PetsTabContent({ shelterId: shleterId }: { shelterId: string }) {
+  const [errorPetsFetch, petsData] = await fetchHelper<PetsResponse>(
+    `${process.env.BACKEND_URL}/api/animales?filters[refugio][id]=${shleterId}`,
+  );
+
+  if (errorPetsFetch !== undefined) {
+    console.error(`error fetching opportunity detail data ${errorPetsFetch.message}`);
+    return;
+  }
+  if (petsData.data.length === 0) {
+    return <div>Sin animales</div>;
+  }
+
+  const pets = petsData.data;
   return (
     <div className="grid grid-cols-[repeat(auto-fit,_minmax(134px,1fr))] gap-1.5 w-full sm:grid-cols-[repeat(auto-fit,_minmax(208px,1fr))]">
-      <PetCard className=" max-w-none w-full" pet={dummyPet} />
-      <PetCard className=" max-w-none w-full" pet={dummyPet} />
-      <PetCard className=" max-w-none w-full" pet={dummyPet} />
-      <PetCard className=" max-w-none w-full" pet={dummyPet} />
+      {pets.map((pet) => (
+        <PetCard key={pet.id} className=" max-w-none w-full" pet={pet} />
+      ))}
     </div>
   );
 }
 
-function OpportunitiesTabContent() {
+async function OpportunitiesTabContent({ shelterId: shleterId }: { shelterId: string }) {
+  const [errorOpportunitiesFetch, opportunitiesData] =
+    await fetchHelper<OpportunitiesResponse>(
+      `${process.env.BACKEND_URL}/api/necesidades?filters[refugio][id]=${shleterId}`,
+    );
+
+  if (errorOpportunitiesFetch !== undefined) {
+    console.error(
+      `error fetching opportunity detail data ${errorOpportunitiesFetch.message}`,
+    );
+    return;
+  }
+
+  if (opportunitiesData.data.length === 0) {
+    return <div>Sin necesidades</div>;
+  }
+
   return (
     <div className="grid grid-cols-[repeat(auto-fit,_minmax(134px,1fr))] gap-1.5 w-full sm:grid-cols-[repeat(auto-fit,_minmax(208px,1fr))]">
-      <OpportunityCard opportunity={undefined} />
-      <OpportunityCard opportunity={undefined} />
-      <OpportunityCard opportunity={undefined} />
+      {opportunitiesData.data.map((opportunity) => (
+        <OpportunityCard key={opportunity.id} opportunity={opportunity} />
+      ))}
     </div>
   );
 }

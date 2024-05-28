@@ -181,3 +181,74 @@ export const petsExample = [
     },
   },
 ];
+
+export const refugioExample = {
+  photo: {
+    url: '/La_Tropa_Gatuna_De_Yanet 1.png',
+    alt: 'logo de la tropa gatuna',
+  },
+  title: 'La Tropa Gatuna De Yanet',
+  description:
+    'brindamos refugio y amor a animales necesitados, pero tu apoyo es esencial. ¡Ayúdanos a seguir salvando vidas!',
+  countDogs: '9',
+  countCats: '10',
+  totalCount: '19',
+  facebookUrl: '#',
+  whatsappUrl: '#',
+  instagramUrl: '#',
+};
+
+export const shelterExample = {
+  banner: {
+    bannerUrl: '/womanfeeding.jpg',
+    bannerAlt: 'a woman feeding a pet',
+  },
+  avatar: {
+    avatarUrl: '/La_Tropa_Gatuna_De_Yanet 1.png',
+    avatarAlt: 'logo la tropa gatuna',
+  },
+  title: 'Fundación La tropa Gatuna de Yanet',
+  dogCount: 23,
+  catCount: 23,
+  totalPets: 86,
+  services: ['service1', 'service2', 'service3'],
+  contactPhone: 123,
+  contactMethods: [
+    { type: 'instagram' as const, url: '#' },
+    { type: 'facebook' as const, url: '#' },
+    { type: 'email' as const, url: '#' },
+    { type: 'whatsApp' as const, url: '#' },
+  ],
+  paymentMethods: [
+    { type: 'nequi', number: 123 },
+    { type: 'Bancolombia', number: 123 },
+  ],
+};
+
+export const dummyPet = {
+  name: 'Milu',
+  photo: {
+    url: '/dog2-removebg-preview.png',
+    alt: 'Milu the dog',
+  },
+  sexo: 'Female',
+  juventud: 'Young',
+};
+
+export const dummyShelter = {
+  logo: {
+    url: '/La_Tropa_Gatuna_De_Yanet 1.png',
+    alt: 'Shelter logo',
+  },
+};
+
+export const opportunityExample = {
+  title: 'Alimento',
+  type: 'Alimentos',
+  quantity: 2000,
+  totalPets: 74,
+  photo: {
+    url: '/alimento.png',
+    alt: 'Un plato con purina',
+  },
+};

@@ -7,12 +7,12 @@ export interface Logo {
 }
 
 export interface SocialNetwork {
-  redSocial: 'instagram' | 'facebook';
+  redSocial: 'facebook' | 'instagram';
   url: string;
 }
 
 export interface PaymentGateway {
-  metodo: string;
+  metodo: 'nequi' | 'daviplata' | 'bancolombia' | 'paypal';
   numCuenta: string;
 }
 

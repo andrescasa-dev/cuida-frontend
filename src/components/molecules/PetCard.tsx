@@ -33,7 +33,7 @@ function PetCard({
           src={composeUrl(PhotoUrl)}
           height={111}
           width={111}
-          alt={PhotoAlt}
+          alt={PhotoAlt || 'foto de una mascota'}
         />
       </div>
       <div className="flex bg-background rounded-[inherit] rounded-t-none px-4 pt-1.5 pb-2.5 sm:px-5 sm:py-5 justify-between">

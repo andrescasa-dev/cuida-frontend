@@ -24,7 +24,7 @@ function Header() {
           <div className="w-8 h-8 bg-amber-900 rounded-sm" id="logo" />
           Cuida
         </Link>
-        <ul className="hidden md:flex lg:gap-11 md:gap-8">
+        <ul className="hidden md:flex gap-2">
           {pages.map(({ href, id, label }) => (
             <li key={id}>
               <Link className={cn(buttonVariants({ variant: 'link' }))} href={href}>
