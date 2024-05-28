@@ -4,9 +4,21 @@ import PetBubble from '../ui/PetBubble';
 
 function HelpingMethods() {
   const methods = [
-    { title: 'metodo ayuda 1', cta: 'seguir', img: '', important: false },
-    { title: 'metodo ayuda 2', cta: 'seguir', img: '', important: true },
-    { title: 'metodo ayuda 3', cta: 'seguir', img: '', important: false },
+    {
+      title: 'Adopta',
+      cta: 'Explorar',
+      img: '',
+      important: false,
+      href: '/mascotas',
+    },
+    { title: 'Dona', cta: 'Donar', img: '', important: true, href: '/oportunidades' },
+    {
+      title: 'Siguenos',
+      cta: 'Descubrir',
+      img: '',
+      important: false,
+      href: '/refugios',
+    },
   ];
   return (
     <section
@@ -67,10 +79,12 @@ function CardItem({
   title,
   cta,
   important,
+  href,
 }: {
   title: string;
   cta: string;
   important: true | false;
+  href: string;
 }) {
   return (
     <li className=" flex flex-col gap-4 lg:gap-6 rounded-[1.5rem] px-8 py-6 lg:px-12  items-center border border-[hsl(var(--border))]">
@@ -82,7 +96,7 @@ function CardItem({
       <CTAButton
         variant={!important ? 'secondary' : undefined}
         className="w-full max-w-none"
-        href="/oportunidades"
+        href={href}
       >
         {cta}
       </CTAButton>

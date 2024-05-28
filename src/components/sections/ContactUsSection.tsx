@@ -11,8 +11,8 @@ function ContactUsSection() {
           principales causas de abandono y sufrimiento.
         </p>
         <div className="flex gap-2 sm:gap-4">
-          <CTAButton href="#">Cont&aacute;ctanos</CTAButton>
-          <CTAButton variant="secondary" href="#">
+          <CTAButton href="/nosotros#contacto">Cont&aacute;ctanos</CTAButton>
+          <CTAButton variant="secondary" href="/nosotros">
             con&oacute;cenos
           </CTAButton>
         </div>

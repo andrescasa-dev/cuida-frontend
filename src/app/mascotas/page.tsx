@@ -3,11 +3,11 @@ import ModalAdoption from '@/components/organisms/ModalAdoption';
 
 import fetchHelper from '@/lib/fetchHelper';
 import { PetsResponse } from '@/types/animals';
-import Link from 'next/link';
 
-async function page() {
+async function page({ searchParams }: { searchParams: { currentPage?: string } }) {
+  const { currentPage } = searchParams;
   const [errorPetsFetch, petsData] = await fetchHelper<PetsResponse>(
-    `${process.env.BACKEND_URL}/api/animales`,
+    `${process.env.BACKEND_URL}/api/animales?pagination[page]=${currentPage || '1'}&pagination[pageSize]=1`,
   );
 
   if (errorPetsFetch !== undefined) {
@@ -19,6 +19,8 @@ async function page() {
     <div>no pets</div>;
     return;
   }
+
+  const totalPages = petsData.pagination.pageCount;
 
   const pets = petsData.data;
 
@@ -36,8 +38,7 @@ async function page() {
           <ModalAdoption key={pet.id} pet={pet} />
         ))}
       </div>
-      <Link href={'/animales?page=2'}>change to page 2</Link>
-      <CustomPagination />
+      <CustomPagination totalPages={totalPages} />
     </main>
   );
 }

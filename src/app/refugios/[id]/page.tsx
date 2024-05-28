@@ -19,7 +19,8 @@ async function shelterDetail({ params }: { params: { id: string } }) {
 
   if (errorShelterFetch !== undefined) {
     console.error('error while trying to fetch shelter data', errorShelterFetch.message);
-    return;
+
+    return <div>ups error al traer la información</div>;
   }
   const shelter = shelterData.data;
 

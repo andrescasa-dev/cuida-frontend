@@ -2,7 +2,11 @@ import OpportunityReel from '@/components/utilites/OpportunityReel';
 
 import { Suspense } from 'react';
 
-async function opportunities() {
+async function opportunities({
+  searchParams,
+}: {
+  searchParams: { currentPage?: string };
+}) {
   return (
     <main className="main-layout flex-grow gap-y-10 mt-4">
       <hgroup>
@@ -12,7 +16,9 @@ async function opportunities() {
         </p>
       </hgroup>
       <Suspense>
-        <OpportunityReel url="/api/necesidades" />
+        <OpportunityReel
+          url={`/api/necesidades?pagination[page]=${searchParams?.currentPage || 1}&pagination[pageSize]=1`}
+        />
       </Suspense>
     </main>
   );

@@ -55,7 +55,7 @@ async function page() {
           </ul>
         </div>
       </section>
-      <section className="md:justify-self-center">
+      <section className="md:justify-self-center" id="contacto">
         <h2 className="subtitle mb-5 md:text-center">Cont&aacute;ctanos</h2>
         <ContactForm />
       </section>

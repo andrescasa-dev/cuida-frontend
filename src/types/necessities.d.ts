@@ -41,4 +41,10 @@ export interface Opportunity {
 
 export interface OpportunitiesResponse {
   data: Opportunity[];
+  pagination: {
+    page: number;
+    pageSize: number;
+    pageCount: number;
+    total: number;
+  };
 }

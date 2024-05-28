@@ -5,6 +5,7 @@ import OportunidadCard from '../molecules/OportunidadCard';
 import { OpportunitiesResponse } from '@/types/necessities';
 
 async function OpportunityReel({ url }: { url: string }) {
+  console.log('url', url);
   const [error, data] = await fetchHelper<OpportunitiesResponse>(
     `${process.env.BACKEND_URL}${url}`,
   );
@@ -12,6 +13,10 @@ async function OpportunityReel({ url }: { url: string }) {
   if (error !== undefined) {
     console.error(`Erro while fetching data: ${error.message}`);
     return;
+  }
+
+  if (data.data.length === 0) {
+    return <div>no hay necesidades disponibles</div>;
   }
 
   const { data: opportunities } = data;
@@ -23,7 +28,7 @@ async function OpportunityReel({ url }: { url: string }) {
           <OportunidadCard opportunity={opportunity} key={opportunity.id} />
         ))}
       </div>
-      <CustomPagination />
+      <CustomPagination totalPages={data.pagination.total} />
     </>
   );
 }
