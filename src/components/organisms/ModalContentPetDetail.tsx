@@ -4,7 +4,7 @@ import PetAvatar from '@/components/ui/PetAvatar';
 import { DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '../ui/button';
 import { Pet } from '@/types/animals';
-import { getSize, getYouthfulness } from '@/lib/utils';
+import { composeUrl, getSize, getYouthfulness } from '@/lib/utils';
 import { Dispatch, SetStateAction } from 'react';
 
 function ModalContentPetDetail({
@@ -37,7 +37,7 @@ function ModalContentPetDetail({
         <PetAvatar
           className="w-48 aspect-square sm:w-full sm:aspect-square  justify-self-center max-sm:col-span-2 shrink-0 inline-flex"
           color="yellow"
-          avatarUrl={url}
+          avatarUrl={composeUrl(url)}
         />
         <section className="max-sm:col-span-2 mx-auto sm:mx-0">
           <h3 className="sr-only font-medium text-base mb-1 sm:not-sr-only ">

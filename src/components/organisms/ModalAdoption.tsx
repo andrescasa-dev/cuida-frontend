@@ -9,14 +9,15 @@ import { Pet } from '@/types/animals';
 function ModalAdoption({ pet }: { pet: Pet }) {
   const { refugio: shelter } = pet;
   const [isFormOpened, setIsFormOpened] = useState<false | true>(false);
+  const lunchOpen = () => setIsFormOpened(false);
   return (
-    <Dialog key={pet.id}>
+    <Dialog key={pet.id} onOpenChange={lunchOpen}>
       <DialogTrigger>
         <PetCard pet={pet} shelter={shelter} />
       </DialogTrigger>
       <DialogContent>
         {isFormOpened ? (
-          <ModalContentPetForm setIsFormOpened={setIsFormOpened} />
+          <ModalContentPetForm pet={pet} />
         ) : (
           <ModalContentPetDetail pet={pet} setIsFormOpened={setIsFormOpened} />
         )}

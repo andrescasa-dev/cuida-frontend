@@ -1,26 +1,25 @@
-import { Pet, Shelter } from '@/types/animals';
+import { Pet } from '@/types/animals';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
-import Icon from '../ui/Icon';
+import { z } from 'zod';
 import { Button } from '../ui/button';
 import { Checkbox } from '../ui/checkbox';
-import { DialogFooter, DialogHeader } from '../ui/dialog';
+import { DialogHeader } from '../ui/dialog';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '../ui/form';
 import { Input } from '../ui/input';
-import { Label } from '../ui/label';
 
-function ModalContentPetForm({
-  pet,
-  shelter,
-  setIsFormOpened,
-}: {
-  pet: Pet;
-  shelter: Shelter;
-}) {
-  // const { whatsapp } = shelter;
-  // const whatsApp = '3166229648';
-  // const petName = pet.nombre;
+function ModalContentPetForm({ pet }: { pet: Pet }) {
+  const whatsApp = pet.refugio.representante.datos_contacto.numero;
+  const petName = pet.nombre;
 
-  const { register, handleSubmit } = useForm();
   return (
     <>
       <DialogHeader>
@@ -32,129 +31,152 @@ function ModalContentPetForm({
           ¡Gracias por tu interés en adoptar!
         </DialogDescription>
       </DialogHeader>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 my-6">
-        <div className="flex gap-3">
-          <div className="grid items-center gap-1.5 flex-grow">
-            <Label htmlFor="name">Nombre</Label>
-            <Input
-              id="name"
-              type="text"
-              placeholder="Juan Trujillo"
-              {...register('name')}
-            />
-          </div>
-          <div className="grid w-24 items-center gap-1.5 shrink-0">
-            <Label htmlFor="age">Edad</Label>
-            <Input id="age" type="number" placeholder="23" {...register('age')} />
-          </div>
-        </div>
-        <div className="flex flex-col gap-3 mt-2">
-          <div className="flex space-x-2">
-            <Checkbox
-              {...register('hasChildren')}
-              className="mt-[.2rem]"
-              id="hasChildren"
-            />
-            <Label htmlFor="hasChildren">hay niños en mi hogar</Label>
-          </div>
-          <div className="flex space-x-2">
-            <Checkbox {...register('hasYard')} className="mt-[.2rem]" id="hasYard" />
-            <Label htmlFor="hasYard">Tengo patio en mi casa</Label>
-          </div>
-          <div className="flex space-x-2">
-            <Checkbox
-              {...register('hasExperience')}
-              className="mt-[.2rem]"
-              id="hasExperience"
-            />
-            <Label htmlFor="hasExperience">Tengo o he tenido mascotas</Label>
-          </div>
-          <div className="flex space-x-2">
-            <Checkbox {...register('hasTime')} className="mt-[.2rem]" id="hasTime" />
-            <Label htmlFor="hasTime">Tengo disponibilidad horaria</Label>
-          </div>
-          <div className="flex space-x-2">
-            <Checkbox
-              {...register('hasPatience')}
-              className="mt-[.2rem]"
-              id="hasPatience"
-            />
-            <Label htmlFor="hasPatience">
-              podr&iacute;a cuidar una mascota con necesidades especiales
-            </Label>
-          </div>
-        </div>
-        <button>enviar</button>
-      </form>
-
-      <DialogFooter className="flex gap-y-2">
-        <Button
-          className="max-w-none w-full"
-          onClick={() => setIsFormOpened(false)}
-          variant={'secondary'}
-        >
-          volver
-        </Button>
-        <Button asChild>
-          <a target="_blank" href={'#'} className={'flex gap-[0.25em] max-w-none w-full'}>
-            Enviar <Icon name="chevronRight" />
-          </a>
-        </Button>
-      </DialogFooter>
+      <CuidaFom whatsApp={whatsApp} petName={petName} />
     </>
   );
 }
-
-function onSubmit(data) {
-  data.whatsApp = '3166229648';
-  data.petName = 'Robin';
-  sendAdoptionForm(data);
-}
-
-function sendAdoptionForm(data) {
-  const {
-    name,
-    age,
-    hasChildren,
-    hasTime,
-    hasYard,
-    hasExperience,
-    hasPatience,
-    petName,
-    whatsApp,
-  } = data;
-
-  let message = `Hola, estoy interesado en adoptar a ${petName}. Quiero saber más sobre el proceso de adopción. \n`;
-  console.log('console log', {
-    name,
-    age,
-    hasChildren,
-    hasTime,
-    hasYard,
-    hasExperience,
-    hasPatience,
-    petName,
-    whatsApp,
+function CuidaFom({ whatsApp, petName }: { whatsApp: string; petName: string }) {
+  const adoptionForm = useForm<formType>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      age: '',
+      items: ['hasChildren'],
+    },
   });
 
-  const hasChildrenBool = hasChildren === 'on';
-  const hasTimeBool = hasTime === 'on';
-  const hasYardBool = hasYard === 'on';
-  const hasExperienceBool = hasExperience === 'on';
-  const hasPatienceBool = hasPatience === 'on';
+  const onSubmitAdoption = (values: formType) => {
+    let msg = `Hola, estoy interesado en adoptar a *${petName}*. Quiero saber más sobre el proceso de adopción. \n`;
 
-  if (name) message += `Soy ${name}, `;
-  if (age) message += ` tengo ${age} años \n`;
-  if (hasChildren) message += `- Hay niños en mi hogar 👶 \n`;
-  if (hasTime) message += `- Tengo disponibilidad horaria ⏰ \n`;
-  if (hasYard) message += `- Tengo patio 🏠 \n`;
-  if (hasExperience) message += `- Tengo o he tenido mascotas antes 🐕 \n`;
-  if (hasPatience)
-    message += `- Estoy abierto a adoptar un perro con necesidades especiales ⚕️ \n`;
+    if (values.name !== '')
+      msg += `Mi nombre es *${values.name}*${values.age ? ', ' : '\n'}`;
+    if (Number(values.age) > 0) msg += `tego *${values.age} años*  \n`;
 
-  const whatsAppLink = `https://api.whatsapp.com/send?phone=+57${whatsApp}&text=${encodeURI(message)}`;
+    msg += items
+      .filter((item) => values.items.some((vItem) => vItem === item.id))
+      .map((item) => item.msg)
+      .join('');
 
-  // window.open(whatsAppLink, '_blank');
+    const whatsAppLink = `https://api.whatsapp.com/send?phone=+57${whatsApp}&text=${encodeURI(msg)}`;
+    window.open(whatsAppLink, '_blank');
+  };
+
+  return (
+    <Form {...adoptionForm}>
+      <form
+        onSubmit={adoptionForm.handleSubmit(onSubmitAdoption)}
+        className="flex flex-col gap-5"
+      >
+        <div className="flex gap-3">
+          <FormField
+            control={adoptionForm.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nombre</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="Juan Trujillo" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={adoptionForm.control}
+            name="age"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Edad</FormLabel>
+                <FormControl>
+                  <Input type="number" placeholder="23" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <FormField
+          control={adoptionForm.control}
+          name="items"
+          render={() => (
+            <FormItem>
+              <div className="mb-4">
+                <FormLabel className="text-base">Sidebar</FormLabel>
+              </div>
+              {items.map((item) => (
+                <FormField
+                  key={item.id}
+                  control={adoptionForm.control}
+                  name="items"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={item.id}
+                        className="flex flex-row items-start space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(item.id)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, item.id])
+                                : field.onChange(
+                                    field.value?.filter((value) => value !== item.id),
+                                  );
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="font-normal">{item.label}</FormLabel>
+                      </FormItem>
+                    );
+                  }}
+                />
+              ))}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button className="max-w-none w-full" type="submit">
+          Submit
+        </Button>
+      </form>
+    </Form>
+  );
 }
+
+const formSchema = z.object({
+  name: z.string().max(38),
+  age: z.string().max(3),
+  items: z.array(z.string()),
+});
+
+type formType = z.infer<typeof formSchema>;
+
+const items = [
+  {
+    id: 'hasChildren',
+    label: 'hay niños en mi hogar ',
+    msg: `* Hay niños en mi hogar 👶 \n`,
+  },
+  {
+    id: 'hasYard',
+    label: 'Tengo patio en mi casa',
+    msg: `* Tengo patio 🏠 \n`,
+  },
+  {
+    id: 'hasExperience',
+    label: 'Tengo o he tenido mascotas',
+    msg: `* Tengo o he tenido mascotas antes 🐕 \n`,
+  },
+  {
+    id: 'hasTime',
+    label: 'Tengo disponibilidad horaria',
+    msg: `* Tengo disponibilidad horaria ⏰ \n`,
+  },
+  {
+    id: 'hasPatience',
+    label: 'podría cuidar una mascota con necesidades especiales',
+    msg: `* Estoy abierto a adoptar un perro con necesidades especiales ⚕️ \n`,
+  },
+] as const;
 
 export default ModalContentPetForm;

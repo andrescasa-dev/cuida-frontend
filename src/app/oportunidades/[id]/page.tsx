@@ -46,8 +46,6 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
   const pets = petsData.data;
   const shelter = shelterData.data;
   const opportunities = opportunityData.data;
-  console.log('pets', pets);
-  console.log('opportunities', opportunities);
   const {
     nombre: shelterName,
     logo: { alternativeText: logoAlt, url: logoUrl },

@@ -1,21 +1,27 @@
 export interface Photo {
   id: number;
   name: string;
-  alternativeText: string;
+  alternativeText: string | null;
   caption: string | null;
   url: string;
+}
+
+export interface ContactInfo {
+  id: number;
+  email: string;
+  numero: string;
 }
 
 export interface Representative {
   id: number;
   nombre: string;
   tipo_documento: string;
+  num_documento: string;
+  numero_celular: string;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
-  num_documento: string | null;
-  numero_celular: string | null;
-  datos_contacto: string | null;
+  datos_contacto: ContactInfo;
 }
 
 export interface Logo {
@@ -37,16 +43,16 @@ export interface Shelter {
 export interface Pet {
   id: number;
   nombre: string;
-  slug: string | null;
+  slug: string;
   sexo: string;
   peso: number;
   edad: number;
   especie: string;
-  personalidad: string[] | null;
-  historia: string | null;
+  personalidad: string[];
+  historia: string;
   esterilizado: boolean;
   padecimientos: string[];
-  estado: string | null;
+  estado: string;
   fotos: Photo[];
   refugio: Shelter;
 }
