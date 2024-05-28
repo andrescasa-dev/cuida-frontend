@@ -12,8 +12,11 @@ export interface SocialNetwork {
 }
 
 export interface PaymentGateway {
-  metodo: string;
-  numCuenta: string;
+  id: number;
+  nequi: string | null;
+  daviplata: string | null;
+  bancolombia: string | null;
+  paypal: string | null;
 }
 
 export interface Shelter {
@@ -25,14 +28,12 @@ export interface Shelter {
   servicios: string[];
   logo: Logo;
   redes: SocialNetwork[];
-  pasarelas: PaymentGateway[];
-  email: string;
-  whatsapp: string;
+  pasarelas: PaymentGateway | null;
   total_mascotas: number;
   total_perros: number;
   total_gatos: number;
 }
 
-export interface ShelterResponse {
-  data: Shelter;
+export interface SheltersResponse {
+  data: Shelter[];
 }
