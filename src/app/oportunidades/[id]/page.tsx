@@ -1,4 +1,3 @@
-import CTAButton from '@/components/molecules/CTAButton';
 import PetCard from '@/components/molecules/PetCard';
 import Icon from '@/components/ui/Icon';
 import PetAvatar from '@/components/ui/PetAvatar';

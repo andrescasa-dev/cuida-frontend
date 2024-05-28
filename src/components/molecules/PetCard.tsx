@@ -17,7 +17,7 @@ function PetCard({
   pet: Pet;
   shelter?: Shelter;
 }) {
-  const { fotos, edad: age } = pet;
+  const { fotos, edad: age, nombre: name } = pet;
   const youthfulness = getYouthfulness(age);
   const { alternativeText: PhotoAlt, url: PhotoUrl } = fotos[0];
   return (
@@ -39,7 +39,7 @@ function PetCard({
       <div className="flex bg-background rounded-[inherit] rounded-t-none px-4 pt-1.5 pb-2.5 sm:px-5 sm:py-5 justify-between">
         <div>
           <h3 className="font-medium text-lg uppercase mb-2 sm:font-semibold text-start">
-            Milu
+            {name}
           </h3>
           <dl className="flex gap-2">
             <dt className="sr-only">Sexo</dt>
