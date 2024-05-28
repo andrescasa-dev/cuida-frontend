@@ -17,7 +17,7 @@ async function opportunities({
       </hgroup>
       <Suspense>
         <OpportunityReel
-          url={`/api/necesidades?pagination[page]=${searchParams?.currentPage || 1}&pagination[pageSize]=1`}
+          url={`/api/necesidades?pagination[page]=${searchParams?.currentPage || 1}`}
         />
       </Suspense>
     </main>

@@ -31,7 +31,6 @@ export default function ContactForm() {
   });
 
   const onSubmit = (data: TContactFrom) => {
-    console.log('data', data);
     const { email, bodyMessage, subject } = data;
     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyMessage)}`;
     const tempLink = document.createElement('a');

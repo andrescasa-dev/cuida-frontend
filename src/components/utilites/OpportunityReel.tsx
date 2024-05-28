@@ -20,6 +20,7 @@ async function OpportunityReel({ url }: { url: string }) {
   }
 
   const { data: opportunities } = data;
+  const pageCount = data.pagination.pageCount;
 
   return (
     <>
@@ -28,7 +29,7 @@ async function OpportunityReel({ url }: { url: string }) {
           <OportunidadCard opportunity={opportunity} key={opportunity.id} />
         ))}
       </div>
-      <CustomPagination totalPages={data.pagination.total} />
+      {pageCount > 1 && <CustomPagination totalPages={pageCount} />}
     </>
   );
 }

@@ -7,7 +7,7 @@ import { PetsResponse } from '@/types/animals';
 async function page({ searchParams }: { searchParams: { currentPage?: string } }) {
   const { currentPage } = searchParams;
   const [errorPetsFetch, petsData] = await fetchHelper<PetsResponse>(
-    `${process.env.BACKEND_URL}/api/animales?pagination[page]=${currentPage || '1'}&pagination[pageSize]=1`,
+    `${process.env.BACKEND_URL}/api/animales?pagination[page]=${currentPage || '1'}`,
   );
 
   if (errorPetsFetch !== undefined) {
@@ -38,7 +38,7 @@ async function page({ searchParams }: { searchParams: { currentPage?: string } }
           <ModalAdoption key={pet.id} pet={pet} />
         ))}
       </div>
-      <CustomPagination totalPages={totalPages} />
+      {totalPages > 1 && <CustomPagination totalPages={totalPages} />}
     </main>
   );
 }
