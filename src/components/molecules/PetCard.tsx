@@ -1,4 +1,4 @@
-import { cn, composeUrl, getYouthfulness } from '@/lib/utils';
+import { cn, composeUrl, getSize, getYouthfulness } from '@/lib/utils';
 import { Pet, ShelterNoRep } from '@/types/animals';
 import Image from 'next/image';
 import React from 'react';
@@ -17,7 +17,8 @@ function PetCard({
   pet: Pet;
   shelter?: ShelterNoRep;
 }) {
-  const { fotos, edad: age, nombre: name } = pet;
+  const { fotos, edad: age, peso: weight, especie: specie, nombre: name } = pet;
+  const size = getSize(weight);
   const youthfulness = getYouthfulness(age);
   const { alternativeText: PhotoAlt, url: PhotoUrl } = fotos[0];
   return (
@@ -29,11 +30,11 @@ function PetCard({
     >
       <div className="relative">
         <Image
-          className="self-center absolute bottom-0 left-0 right-0 mx-auto size-[7rem] sm:size-[9rem]"
+          className="self-center absolute bottom-0 left-0 right-0 mx-auto size-[7rem] lg:size-[13rem] md:size-[11rem] sm:size-[9rem]"
           src={composeUrl(PhotoUrl)}
-          height={111}
-          width={111}
-          alt={PhotoAlt || 'foto de una mascota'}
+          height={150}
+          width={150}
+          alt={PhotoAlt || `Foto de un ${specie} ${size} y ${youthfulness}`}
         />
       </div>
       <div className="flex bg-background rounded-[inherit] rounded-t-none px-4 pt-1.5 pb-2.5 sm:px-5 sm:py-5 justify-between">

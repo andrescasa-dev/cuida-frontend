@@ -87,7 +87,7 @@ function ModalContentPetDetail({
         className="flex flex-col gap-2
        mt-4"
       >
-        <CTAButton className="w-full max-w-none" href="#" variant="secondary">
+        <CTAButton className="w-full max-w-none" href={`/refugios/${pet.refugio.id}`} variant="secondary">
           Visitar refugio
         </CTAButton>
         {/* This is not a link */}
