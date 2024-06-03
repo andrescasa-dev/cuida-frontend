@@ -1,5 +1,11 @@
 import React from 'react';
+import { Separator } from '@/components/ui/separator';
+
 import Icon from '../ui/Icon';
+import LogoH from '../ui/icons/LogoH';
+import { buttonVariants } from '../ui/button';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 function Footer() {
   /*todo: has to be a global const*/
@@ -9,36 +15,55 @@ function Footer() {
   };
 
   return (
-    <footer className="main-layout brake-main-layout main-layout mt-28 bg-muted ">
-      <div className="grid items-center gap-y-4 grid-cols-3 py-12">
-        <div className="flex gap-4 max-md:col-span-2">
-          {/* Todo: this is another component */}
-          <div id="logo" className="w-[46px] h-[42px] bg-amber-900 rounded-sm" />
-          <address className="flex flex-col  emphasis text-nowrap">
-            <p aria-label="correo electrónico">{email}</p>
-            <p aria-label="teléfono de contacto">{contactPhone}</p>
-          </address>
-        </div>
-        <ul className="flex flex-col xs:flex-row gap-2 justify-self-end">
-          <li>
-            <a href="/">
-              <Icon aria-hidden={false} aria-label="Instagram" name="instagram" />
-            </a>
-          </li>
-          <li>
-            <a href="/">
-              <Icon aria-hidden={false} aria-label="FaceBook" name="facebook" />
-            </a>
-          </li>
-          <li>
-            <a href="/">
-              <Icon aria-hidden={false} aria-label="WhatsApp" name="whatsApp" />
-            </a>
-          </li>
-        </ul>
-        <div className="flex gap-2 items-center justify-self-center col-start-1 col-end-[-1] md:col-span-1 md:row-start-1 md:col-start-2">
+    <footer className="brake-main-layout mt-28 bg-muted py-5 ">
+      <div className="main-layout justify-items-center">
+        <LogoH />
+        <Separator className="my-5 opacity-25" />
+        <section
+          aria-label="medios de contacto"
+          className="flex flex-col gap-1 items-center"
+        >
+          <ul className="flex  xs:flex-row gap-2 justify-self-end">
+            <li>
+              <a href="/">
+                <Icon aria-hidden={false} aria-label="Instagram" name="instagram" />
+              </a>
+            </li>
+            <li>
+              <a href="/">
+                <Icon aria-hidden={false} aria-label="FaceBook" name="facebook" />
+              </a>
+            </li>
+            <li>
+              <a href="/">
+                <Icon aria-hidden={false} aria-label="WhatsApp" name="whatsApp" />
+              </a>
+            </li>
+          </ul>
+          <Link
+            className={cn(buttonVariants({ variant: 'link' }), '-mt-2')}
+            href="/nosotros#contacto"
+          >
+            Envíanos un email
+          </Link>
+        </section>
+        <Separator className="my-5 opacity-25" />
+        <address>
+          <ul className="space-y-2">
+            <li className="flex gap-1">
+              <Icon name="email" />
+              <p aria-label="correo electrónico">{email}</p>
+            </li>
+            <li className="flex gap-1">
+              <Icon name="phone" className="fill-black" />
+              <p aria-label="teléfono de contacto">{contactPhone}</p>
+            </li>
+          </ul>
+        </address>
+        <Separator className="my-5 opacity-25" />
+        <div className="flex gap-2 items-center">
           <Icon aria-hidden={true} name="copyRight" />
-          <p className="base opacity-50">Copyright</p>
+          <p className="base opacity-50">2024 todos los derechos reservados</p>
         </div>
       </div>
     </footer>
