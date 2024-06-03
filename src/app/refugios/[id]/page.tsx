@@ -170,12 +170,21 @@ async function shelterDetail({ params }: { params: { id: string } }) {
           <h2 className="text-lg font-semibold mb-4">Pasarelas</h2>
           <ul className="flex flex-col gap-2">
             {paymentMethods.map(({ numCuenta: number, metodo: type }) => (
-              <li
-                key={type}
-                className="flex gap-2 items-center text-sm capitalize bg-muted rounded-sm py-1"
-              >
-                <Files className="size-4" /> {number}
-              </li>
+              type.toLowerCase() === 'paypal' ? (
+                <li
+                  key={type}
+                  className="flex gap-2 items-center text-sm capitalize bg-muted rounded-sm py-1"
+                >
+                  <Files className="size-4" /> {number}
+                </li>
+              ) : (
+                <li
+                  key={type}
+                  className="flex gap-2 items-center text-sm capitalize bg-muted rounded-sm py-1"
+                >
+                  <Files className="size-4" /> {type} - {number}
+                </li>
+              )
             ))}
           </ul>
         </section>
