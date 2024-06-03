@@ -4,10 +4,14 @@ import ModalAdoption from '@/components/organisms/ModalAdoption';
 import fetchHelper from '@/lib/fetchHelper';
 import { PetsResponse } from '@/types/animals';
 
-async function page({ searchParams }: { searchParams: { currentPage?: string } }) {
-  const { currentPage } = searchParams;
+async function page({ searchParams }: { searchParams: { currentPage?: string, refugio?: number } }) {
+  const { currentPage, refugio } = searchParams;
+  let url = `${process.env.BACKEND_URL}/api/animales?pagination[page]=${currentPage || '1'}&pagination[pageSize]=6`;
+  if (refugio) {
+    url += `&filters[refugio][id]=${searchParams.refugio}`;
+  }
   const [errorPetsFetch, petsData] = await fetchHelper<PetsResponse>(
-    `${process.env.BACKEND_URL}/api/animales?pagination[page]=${currentPage || '1'}`,
+    url,
   );
 
   if (errorPetsFetch !== undefined) {

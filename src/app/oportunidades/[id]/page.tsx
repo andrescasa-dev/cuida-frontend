@@ -166,7 +166,7 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
           </ScrollArea>
           <Link
             className={cn(buttonVariants({ variant: 'link' }), 'self-end underline')}
-            href="#"
+            href={`/mascotas?refugio=${shelter.id}`}
           >
             Conoce todas las mascotas <ArrowRight className="ml-1 size-4" />
           </Link>
