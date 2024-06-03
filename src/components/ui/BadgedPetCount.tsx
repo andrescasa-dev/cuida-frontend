@@ -16,9 +16,11 @@ function BadgedPetCount({
       )}
     >
       <dt aria-label="cantidad de mascotas" className="text-xs ">
-        mascotas
+        Mascotas
       </dt>
-      <dd className="text-[1.75rem] font-medium">{petQuantity}</dd>
+      <dd className="text-[1.75rem] font-medium">
+        {petQuantity === 0 ? 'Todas' : petQuantity}
+      </dd>
     </dl>
   );
 }
