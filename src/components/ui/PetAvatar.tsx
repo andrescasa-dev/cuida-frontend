@@ -1,12 +1,6 @@
 import { cn } from '@/lib/utils';
 import React from 'react';
 
-const petImages = {
-  dog2: '/dog2-removebg-preview.png',
-};
-
-type PetImages = keyof typeof petImages;
-
 const colors = {
   yellow: 'bg-[hsl(40_79%_49%_/_.7)]',
   green: 'bg-[hsl(118_72%_42%_/_.7)]',

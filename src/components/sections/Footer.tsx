@@ -27,7 +27,7 @@ function Footer() {
           </li>
           <li>
             <a href="/">
-              <Icon aria-hidden={false} aria-label="FaceBook" name="faceBook" />
+              <Icon aria-hidden={false} aria-label="FaceBook" name="facebook" />
             </a>
           </li>
           <li>

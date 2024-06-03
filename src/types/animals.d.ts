@@ -40,6 +40,13 @@ export interface Shelter {
   representante: Representative;
 }
 
+export interface ShelterNoRep {
+  id: number;
+  nombre: string;
+  slug: string;
+  logo: Logo;
+}
+
 export interface Pet {
   id: number;
   nombre: string;

@@ -1,5 +1,5 @@
 import { cn, composeUrl, getYouthfulness } from '@/lib/utils';
-import { Pet, Shelter } from '@/types/animals';
+import { Pet, ShelterNoRep } from '@/types/animals';
 import Image from 'next/image';
 import React from 'react';
 
@@ -15,7 +15,7 @@ function PetCard({
 }: {
   className?: string;
   pet: Pet;
-  shelter?: Shelter;
+  shelter?: ShelterNoRep;
 }) {
   const { fotos, edad: age, nombre: name } = pet;
   const youthfulness = getYouthfulness(age);
