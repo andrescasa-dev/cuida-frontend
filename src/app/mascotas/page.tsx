@@ -43,15 +43,6 @@ async function page({
         {pets.map((pet) => (
           <ModalAdoption key={pet.id} pet={pet} />
         ))}
-        {pets.map((pet) => (
-          <ModalAdoption key={pet.id} pet={pet} />
-        ))}
-        {pets.map((pet) => (
-          <ModalAdoption key={pet.id} pet={pet} />
-        ))}
-        {pets.map((pet) => (
-          <ModalAdoption key={pet.id} pet={pet} />
-        ))}
       </div>
       {totalPages > 1 && <CustomPagination totalPages={totalPages} />}
     </main>
