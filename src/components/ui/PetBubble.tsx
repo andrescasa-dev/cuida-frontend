@@ -8,10 +8,10 @@ const petImages = {
 type PetImages = keyof typeof petImages;
 
 const colors = {
-  yellow: 'bg-[hsl(40_79%_49%_/_.7)]',
-  green: 'bg-[hsl(118_72%_42%_/_.7)]',
-  blue: 'bg-[hsl(217_77%_45%_/_.7)]',
-  violet: 'bg-[hsl(327_74%_59%_/_.7)]',
+  yellow: 'bg-dec_yellow',
+  green: 'bg-dec_green',
+  blue: 'bg-dec_blue',
+  violet: 'bg-dec_violet',
 };
 
 type Colors = keyof typeof colors;

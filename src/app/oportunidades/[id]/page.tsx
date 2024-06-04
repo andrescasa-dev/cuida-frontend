@@ -125,14 +125,18 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
                   )}
                 </p>
                 {opportunity.mascotas_beneficiadas && (
-                  <ul className="flex -space-x-6 mt-2 ">
+                  <ul className="flex space-x-1 flex-wrap mt-2 ">
                     {opportunity.mascotas_beneficiadas.map((pet) => (
                       <li key={pet.id}>
                         <PetAvatar
                           className="size-12 "
+                          petName={pet.nombre}
+                          petId={pet.id}
                           avatarUrl={composeUrl(pet.fotos[0].url)}
-                          color="yellow"
                         />
+                        <p className="text-xs font-medium text-center opacity-70">
+                          {pet.nombre}
+                        </p>
                       </li>
                     ))}
                   </ul>

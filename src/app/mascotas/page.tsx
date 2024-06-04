@@ -39,7 +39,16 @@ async function page({
           refugio.
         </p>
       </hgroup>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7 justify-center">
+      <div className="grid min-[390px]:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-7 justify-center">
+        {pets.map((pet) => (
+          <ModalAdoption key={pet.id} pet={pet} />
+        ))}
+        {pets.map((pet) => (
+          <ModalAdoption key={pet.id} pet={pet} />
+        ))}
+        {pets.map((pet) => (
+          <ModalAdoption key={pet.id} pet={pet} />
+        ))}
         {pets.map((pet) => (
           <ModalAdoption key={pet.id} pet={pet} />
         ))}

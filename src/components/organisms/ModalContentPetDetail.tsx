@@ -15,6 +15,7 @@ function ModalContentPetDetail({
   setIsFormOpened: Dispatch<SetStateAction<boolean>>;
 }) {
   const {
+    id,
     nombre: name,
     fotos,
     sexo: sex,
@@ -36,7 +37,8 @@ function ModalContentPetDetail({
       <div className="grid grid-cols-2 sm:grid-cols-3 sm:gap-4 gap-y-6">
         <PetAvatar
           className="w-48 aspect-square sm:w-full sm:aspect-square  justify-self-center max-sm:col-span-2 shrink-0 inline-flex"
-          color="yellow"
+          petId={id}
+          petName={name}
           avatarUrl={composeUrl(url)}
         />
         <section className="max-sm:col-span-2 mx-auto sm:mx-0">

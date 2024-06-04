@@ -5,7 +5,7 @@ import ShelterServices from '@/components/sections/ShelterServices';
 
 export default function Home() {
   return (
-    <main id="main" className="main-layout">
+    <main id="main" className="landing-layout">
       <Hero />
       <ShelterServices />
       <HelpingMethods />
