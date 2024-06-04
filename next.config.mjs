@@ -3,9 +3,9 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
+        hostname: 'energized-freedom-a5bd4233fe.media.strapiapp.com',
+        protocol: 'https',
+        port: '',
       },
     ],
   },

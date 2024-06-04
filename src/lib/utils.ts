@@ -11,7 +11,7 @@ export const getYouthfulness = (age: number) =>
 export const getSize = (weight: number) =>
   weight > 25 ? 'Grande' : weight > 10 ? 'Mediano' : 'pequeño';
 
-export const composeUrl = (relativeUrl: string) => `http://localhost:1337${relativeUrl}`;
+export const composeUrl = (relativeUrl: string) => `${relativeUrl}`;
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
