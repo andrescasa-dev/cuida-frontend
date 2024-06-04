@@ -157,7 +157,7 @@ async function shelterDetail({ params }: { params: { id: string } }) {
       </main>
       <aside className="w-full hidden lg:flex col-start-3 border border-border rounded-[0.75rem] bg-background px-4 py-8 flex-col gap-14">
         <section>
-          <h2 className="text-lg font-semibold mb-4">Nuestros servicios</h2>
+          <h2 className="text-lg font-semibold mb-4">Nuestros Servicios</h2>
           <ul className="flex flex-col gap-2">
             {services.map((service) => (
               <li key={service} className="flex gap-2 items-center text-sm  capitalize">
