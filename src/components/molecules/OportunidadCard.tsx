@@ -10,12 +10,12 @@ const opportunityImages = {
     alt: 'bulto de alimento para mascotas',
   },
   Cirugía: {
-    url: '/alimento.png',
-    alt: 'bulto de alimento para mascotas',
+    url: '/pinzas.png',
+    alt: 'pinzas instrumento quirúrgico',
   },
   Medicamento: {
-    url: '/alimento.png',
-    alt: 'bulto de alimento para mascotas',
+    url: '/medicamento.png',
+    alt: 'frascos de medicamento para mascotas',
   },
 };
 
