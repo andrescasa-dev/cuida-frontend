@@ -27,6 +27,10 @@
     --border-radius: 0.3rem;
     --text-muted: 0 0% 47%;
     --body-width: 75rem;
+    --dec-yellow: 40 79% 49% / .7;
+    --dec-green: 118 72% 42% / .7;  
+    --dec-blue: 217 77% 45% / .7;
+    --dec-violet: 327 74% 59% / .7;
   }
 
   .dark {
@@ -50,6 +54,10 @@
     --input: 12 6.5% 15.1%;
     --ring: 20.5 90.2% 48.2%;
     --text-muted: 0 0% 47%;
+    --dec-yellow: 40 79% 49% / .7;
+    --dec-green: 118 72% 42% / .7;  
+    --dec-blue: 217 77% 45% / .7;
+    --dec-violet: 327 74% 59% / .7;
   }
 }
 

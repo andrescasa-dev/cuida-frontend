@@ -2,11 +2,7 @@ import { cn, composeUrl, getYouthfulness } from '@/lib/utils';
 import { Pet, ShelterNoRep } from '@/types/animals';
 import Image from 'next/image';
 import React from 'react';
-
-/*
-TODO
-- proper responsive image
-*/
+import Blob from '../ui/icons/Blob';
 
 function PetCard({
   pet,
@@ -17,7 +13,8 @@ function PetCard({
   pet: Pet;
   shelter?: ShelterNoRep;
 }) {
-  const { fotos, edad: age, nombre: name } = pet;
+  console.log('pet card render');
+  const { fotos, edad: age, nombre: name, id } = pet;
   const youthfulness = getYouthfulness(age);
   const { alternativeText: PhotoAlt, url: PhotoUrl } = fotos[0];
   return (
@@ -27,19 +24,24 @@ function PetCard({
         className,
       )}
     >
-      <div className="relative">
+      <div className="relative h-full">
+        <Blob
+          className={'absolute inset-y-0 top-6 h-[100%] w-[100%]'}
+          color={id % 4}
+          figure={id % 4}
+        />
         <Image
-          className="self-center absolute bottom-0 left-0 right-0 mx-auto size-[7rem] sm:size-[9rem]"
+          className="self-center absolute bottom-0 left-0 right-0 mx-auto size-[7rem] sm:size-[9rem] lg:size-[12rem]"
           src={composeUrl(PhotoUrl)}
           height={111}
           width={111}
           alt={PhotoAlt || 'foto de una mascota'}
         />
       </div>
-      <div className="flex bg-background rounded-[inherit] rounded-t-none px-4 pt-1.5 pb-2.5 sm:px-5 sm:py-5 justify-between">
+      <div className="flex bg-background rounded-[inherit] rounded-t-none px-4 pt-1.5 pb-2.5 sm:px-5 sm:py-5 justify-between z-10">
         <div>
           <h3 className="font-medium text-lg uppercase mb-2 sm:font-semibold text-start">
-            {name}
+            {name} {id % 4}
           </h3>
           <dl className="flex gap-2">
             <dt className="sr-only">Sexo</dt>
