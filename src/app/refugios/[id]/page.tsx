@@ -215,7 +215,7 @@ async function PetsTabContent({ shelterId: shleterId }: { shelterId: string }) {
   );
 
   if (errorPetsFetch !== undefined) {
-    console.error(`error fetching opportunity detail data ${errorPetsFetch.message}`);
+    console.error(`error fetching shelter's pets data ${errorPetsFetch.message}`);
     return;
   }
   if (petsData.data.length === 0) {
@@ -240,7 +240,7 @@ async function OpportunitiesTabContent({ shelterId: shleterId }: { shelterId: st
 
   if (errorOpportunitiesFetch !== undefined) {
     console.error(
-      `error fetching opportunity detail data ${errorOpportunitiesFetch.message}`,
+      `error fetching shelter detail data ${errorOpportunitiesFetch.message}`,
     );
     return;
   }

@@ -11,7 +11,7 @@ async function ShelterPage() {
   );
 
   if (errorPetsFetch !== undefined) {
-    console.error(`error fetching opportunity detail data ${errorPetsFetch.message}`);
+    console.error(`error fetching shelters data ${errorPetsFetch.message}`);
     return;
   }
   const shelters = sheltersData.data;

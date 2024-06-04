@@ -15,7 +15,7 @@ async function page({ searchParams }: { searchParams: { currentPage?: string, re
   );
 
   if (errorPetsFetch !== undefined) {
-    console.error(`error fetching opportunity detail data ${errorPetsFetch.message}`);
+    console.error(`error fetching pets data ${errorPetsFetch.message}`);
     return;
   }
 
