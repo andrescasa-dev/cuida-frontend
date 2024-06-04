@@ -6,7 +6,8 @@ export default async function fetchHelper<T>(url: string): Promise<Response<T>> 
       headers: {
         Authorization: `Bearer ${process.env.API_TOKEN}`,
       },
-      cache: process.env.NEXT_PUBLIC_ENVIRONMENT === 'develop' ? 'no-cache' : 'force-cache',
+      cache:
+        process.env.NEXT_PUBLIC_ENVIRONMENT === 'develop' ? 'no-cache' : 'force-cache',
     });
     if (!response.ok) {
       return [new Error(response.statusText)];

@@ -169,7 +169,7 @@ async function shelterDetail({ params }: { params: { id: string } }) {
         <section>
           <h2 className="text-lg font-semibold mb-4">Pasarelas</h2>
           <ul className="flex flex-col gap-2">
-            {paymentMethods.map(({ numCuenta: number, metodo: type }) => (
+            {paymentMethods.map(({ numCuenta: number, metodo: type }) =>
               type.toLowerCase() === 'paypal' ? (
                 <li
                   key={type}
@@ -184,8 +184,8 @@ async function shelterDetail({ params }: { params: { id: string } }) {
                 >
                   <Files className="size-4" /> {type} - {number}
                 </li>
-              )
-            ))}
+              ),
+            )}
           </ul>
         </section>
         <section>
