@@ -15,7 +15,7 @@ function ShelterAvatar({ shelter, className }: { shelter: Shelter; className?: s
     >
       <Image
         alt={`foto avatar del refugio: ${nombre}`}
-        src={`${process.env.BACKEND_URL}${logo.url}`}
+        src={logo.url}
         height={58}
         width={58}
       />

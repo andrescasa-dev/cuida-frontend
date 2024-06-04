@@ -86,7 +86,7 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
       <div className="flex flex-col md:flex-row gap-[inherit] md:gap-x-6 md:justify-between">
         <section className="md:shrink-0 ">
           <hgroup className="flex gap-2 items-center mb-3 sm:mb-5">
-            <h2 className="font-semibold text-lg sm:text-[1.375rem] ">Gastos del més</h2>
+            <h2 className="font-semibold text-lg sm:text-[1.375rem] ">Gastos vigentes</h2>
             <time
               className="font-medium text-sm sm:text-base text-muted-text mt-1"
               dateTime={month}
@@ -107,10 +107,10 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
                 )}
               >
                 <h3 className="font-semibold text-lg sm:text-xl first-letter:uppercase ">
-                  alimento
+                  {opportunity.tipo}
                 </h3>
                 <p className="font-semibold text-sm sm:text-base flex items-center gap-1 text-muted-text">
-                  200,000$
+                  ${opportunity.meta_dinero}
                   {opportunity.documento_soporte && (
                     <a
                       target="_blank"
@@ -130,7 +130,7 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
                       <li key={pet.id}>
                         <PetAvatar
                           className="size-12 "
-                          avatarUrl="/dog2-removebg-preview.png" //la api aun no devuelve la foto
+                          avatarUrl={composeUrl(pet.fotos[0].url)}
                           color="yellow"
                         />
                       </li>
@@ -145,7 +145,7 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
                     mascotas
                   </dt>
                   <dd className="font-medium text-base">
-                    {opportunity.total_mascotas_beneficiadas}
+                    {opportunity.total_mascotas_beneficiadas === 0 ? 'Todas' : opportunity.total_mascotas_beneficiadas}
                   </dd>
                 </dl>
               </article>
@@ -166,7 +166,7 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
           </ScrollArea>
           <Link
             className={cn(buttonVariants({ variant: 'link' }), 'self-end underline')}
-            href={`/mascotas?refugio=${shelter.id}`}
+            href={`/refugios/${shelter.id}`}
           >
             Conoce todas las mascotas <ArrowRight className="ml-1 size-4" />
           </Link>

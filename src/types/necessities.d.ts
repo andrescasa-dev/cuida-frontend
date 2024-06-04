@@ -1,3 +1,11 @@
+export interface Photo {
+  id: number;
+  name: string;
+  alternativeText: string | null;
+  caption: string | null;
+  url: string;
+}
+
 export interface Logo {
   id: number;
   name: string;
@@ -22,6 +30,7 @@ export interface BenefitedPet {
   id: number;
   nombre: string;
   slug: string;
+  fotos: Photo[];
 }
 
 export interface Opportunity {
