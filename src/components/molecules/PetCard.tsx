@@ -26,7 +26,7 @@ function PetCard({
       <div className="relative h-full">
         <Blob className={'absolute inset-y-0 top-6 h-[100%] w-[100%]'} baseId={id} />
         <Image
-          className="self-center absolute bottom-0 left-0 right-0 mx-auto size-[7rem] sm:size-[9rem] lg:size-[12rem]"
+          className="self-center absolute bottom-0 left-0 right-0 mx-auto size-[7rem] sm:size-[9rem] lg:size-[12rem] object-cover"
           src={composeUrl(PhotoUrl)}
           height={111}
           width={111}
