@@ -18,10 +18,19 @@ export interface SupportingDocument {
   url: string;
 }
 
+export interface Photo {
+  id: number;
+  name: string;
+  alternativeText: string | null;
+  caption: string | null;
+  url: string;
+}
+
 export interface BenefitedPet {
   id: number;
   nombre: string;
   slug: string;
+  fotos: Photos[];
 }
 
 export interface Opportunity {

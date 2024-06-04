@@ -1,18 +1,11 @@
-import { cn } from '@/lib/utils';
+import { cn, getAnimalCustomStyles } from '@/lib/utils';
 
-function Blob({
-  className,
-  color = 0,
-  figure = 0,
-}: {
-  className?: string;
-  color?: number;
-  figure?: number;
-}) {
+function Blob({ className, baseId = 0 }: { baseId?: number; className?: string }) {
+  const idxById = (baseId % 4) as 0 | 1 | 2 | 3;
+  const { fillColor } = getAnimalCustomStyles(baseId);
   const figures = [
     <path
       key={0}
-      fillOpacity="0.7"
       fillRule="evenodd"
       stroke="#000"
       strokeOpacity="0.5"
@@ -31,7 +24,6 @@ function Blob({
     ></path>,
     <path
       key={2}
-      fillOpacity="0.7"
       fillRule="evenodd"
       stroke="#000"
       strokeOpacity="0.5"
@@ -41,7 +33,6 @@ function Blob({
     ></path>,
     <path
       key={3}
-      fillOpacity="0.7"
       fillRule="evenodd"
       stroke="#000"
       strokeOpacity="0.5"
@@ -57,15 +48,9 @@ function Blob({
       height="304"
       fill="none"
       viewBox="0 0 237 304"
-      className={cn(
-        className,
-        { 'fill-dec_yellow': color === 0 },
-        { 'fill-dec_blue': color === 1 },
-        { 'fill-dec_green': color === 2 },
-        { 'fill-dec_violet': color === 3 },
-      )}
+      className={cn(className, fillColor)}
     >
-      {figures[figure]}
+      {figures[idxById]}
     </svg>
   );
 }

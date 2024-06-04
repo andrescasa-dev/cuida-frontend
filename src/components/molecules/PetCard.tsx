@@ -13,7 +13,6 @@ function PetCard({
   pet: Pet;
   shelter?: ShelterNoRep;
 }) {
-  console.log('pet card render');
   const { fotos, edad: age, nombre: name, id } = pet;
   const youthfulness = getYouthfulness(age);
   const { alternativeText: PhotoAlt, url: PhotoUrl } = fotos[0];
@@ -25,11 +24,7 @@ function PetCard({
       )}
     >
       <div className="relative h-full">
-        <Blob
-          className={'absolute inset-y-0 top-6 h-[100%] w-[100%]'}
-          color={id % 4}
-          figure={id % 4}
-        />
+        <Blob className={'absolute inset-y-0 top-6 h-[100%] w-[100%]'} baseId={id} />
         <Image
           className="self-center absolute bottom-0 left-0 right-0 mx-auto size-[7rem] sm:size-[9rem] lg:size-[12rem]"
           src={composeUrl(PhotoUrl)}
@@ -41,7 +36,7 @@ function PetCard({
       <div className="flex bg-background rounded-[inherit] rounded-t-none px-4 pt-1.5 pb-2.5 sm:px-5 sm:py-5 justify-between z-10">
         <div>
           <h3 className="font-medium text-lg uppercase mb-2 sm:font-semibold text-start">
-            {name} {id % 4}
+            {name}
           </h3>
           <dl className="flex gap-2">
             <dt className="sr-only">Sexo</dt>
