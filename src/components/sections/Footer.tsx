@@ -15,7 +15,7 @@ function Footer() {
   };
 
   return (
-    <footer className="brake-main-layout mt-28 bg-muted py-5 ">
+    <footer className="brake-main-layout mt-28 bg-muted py-6 ">
       <div className="main-layout">
         <div className="max-sm:main-layout grid md:grid-cols-[auto_1fr_auto] md:gap-y-1 items-center justify-items-center">
           <div className="md:col-start-2 md:row-start-1">
