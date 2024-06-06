@@ -218,7 +218,7 @@ const PaymentMethodsList = ({ paymentMethods }: { paymentMethods: PaymentGateway
           className="flex gap-2 items-center text-sm capitalize bg-muted rounded-sm py-1"
         >
           <CopyButton text={String(number)}>
-            {type} - ${number}
+            {type} - {number}
           </CopyButton>
         </li>
       ))}
