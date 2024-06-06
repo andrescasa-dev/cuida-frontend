@@ -4,8 +4,8 @@ import PetAvatar from '@/components/ui/PetAvatar';
 import { DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '../ui/button';
 import { Pet } from '@/types/animals';
-import { composeUrl, getSize, getYouthfulness } from '@/lib/utils';
-import { Dispatch, SetStateAction } from 'react';
+import { cn, composeUrl, getSize, getYouthfulness } from '@/lib/utils';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 function ModalContentPetDetail({
   pet,
@@ -28,13 +28,13 @@ function ModalContentPetDetail({
   const size = getSize(weight);
   const youthfulness = getYouthfulness(age);
   const { url } = fotos[0];
-
+  const [textOpen, setTextOpe] = useState(false);
   return (
     <>
       <DialogHeader>
         <DialogTitle className="uppercase font-semibold text-4xl">{name}</DialogTitle>
       </DialogHeader>
-      <div className="grid grid-cols-2 sm:grid-cols-3 sm:gap-4 gap-y-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 sm:gap-4 gap-y-4">
         <PetAvatar
           className="w-48 aspect-square sm:w-full sm:aspect-square  justify-self-center max-sm:col-span-2 shrink-0 inline-flex"
           petId={id}
@@ -62,7 +62,12 @@ function ModalContentPetDetail({
         </section>
         <section className="col-span-2 sm:col-span-3 sm:row-start-1 sm:col-start-2">
           <h3 className="font-medium text-base mb-1">Historia</h3>
-          <p className="text-sm ">{story}</p>
+          <p
+            onClick={() => setTextOpe((prev) => !prev)}
+            className={cn('text-sm', { 'line-clamp-3': !textOpen })}
+          >
+            {story}
+          </p>
         </section>
         <section>
           <h3 className="font-medium text-base mb-1">Personalidad</h3>
