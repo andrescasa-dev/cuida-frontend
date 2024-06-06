@@ -50,7 +50,9 @@ async function ShelterPage() {
                 className="bg-gray-200 rounded-full aspect-square border-4 border-border "
               />
               <h2 className="font-semibold text-2xl text-center">{name}</h2>
-              <p className="text-base text-center max-w-[36ch]">{description}</p>
+              <p className="text-base text-center max-w-[36ch] line-clamp-3 text-pretty ">
+                {description}
+              </p>
               <dl className="grid grid-cols-3 gap-x-1">
                 <div className="bg-background px-3 py-3 flex flex-col items-center rounded-input">
                   <dt className="font-medium text-xs">Perros</dt>
@@ -66,11 +68,11 @@ async function ShelterPage() {
                 </div>
               </dl>
               <footer className="z-20">
-                <ul className="flex gap-1">
+                <ul className="flex gap-2">
                   {socialNetworks.map(({ redSocial, url }) => (
                     <li key={redSocial}>
                       <a target="_blank" href={url}>
-                        <Icon name={redSocial} />
+                        <Icon name={redSocial} className="size-6" />
                       </a>
                     </li>
                   ))}

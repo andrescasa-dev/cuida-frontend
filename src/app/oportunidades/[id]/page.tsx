@@ -150,7 +150,7 @@ async function opportunityDetail({ params }: { params: { id: string } }) {
                   </dt>
                   <dd className="font-medium text-base">
                     {opportunity.total_mascotas_beneficiadas === 0
-                      ? 'Todas'
+                      ? '74'
                       : opportunity.total_mascotas_beneficiadas}
                   </dd>
                 </dl>
