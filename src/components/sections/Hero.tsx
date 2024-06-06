@@ -1,19 +1,16 @@
+import { ArrowDown } from 'lucide-react';
 import CTAButton from '../molecules/CTAButton';
-import Icon from '../ui/Icon';
-
-//className="absolute bottom-0 left-0 right-0 mx-auto"
-//.splice(2, 0, );
 
 export default function Hero() {
   const socialProof = [
     { label: 'Personas Aportando', statistic: '140+' },
-    { label: 'Personas Aportando', statistic: '140+' },
-    { label: 'Personas Aportando', statistic: '140+' },
-    { label: 'Personas Aportando', statistic: '140+' },
+    { label: 'Mascotas Registradas', statistic: '500+' },
+    { label: 'Refugios Asociados', statistic: '3' },
+    { label: 'formas de ayuda', statistic: '30+' },
   ];
   const perks = socialProof.map(({ label, statistic }) => (
     <li
-      className="sm:p-4 p-3 bg-muted rounded-md max-w-fit h-fit"
+      className="sm:p-4 p-3 bg-muted rounded-md  w-[210px] h-fit"
       key={crypto.randomUUID()}
     >
       <p className="text-[0.68rem] sm:text-base font-medium text-[rgb(123,107,91)]">
@@ -42,9 +39,9 @@ export default function Hero() {
         alt=""
       />
       {/*asegurarse de que tiene el formato adecuado */}
-      <Icon
+
+      <ArrowDown
         aria-hidden={true}
-        name="funnyArrow"
         className="absolute -bottom-14 lg:-bottom-0 lg:-translate-y-1/2 left-0 right-0 mx-auto"
       />
     </section>

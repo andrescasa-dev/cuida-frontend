@@ -19,7 +19,7 @@ function BadgedPetCount({
         Mascotas
       </dt>
       <dd className="text-[1.75rem] font-medium">
-        {petQuantity === 0 ? 'Todas' : petQuantity}
+        {petQuantity === 0 ? '74' : petQuantity}
       </dd>
     </dl>
   );

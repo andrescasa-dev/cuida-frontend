@@ -4,21 +4,21 @@ import SRPause from '../ui/SRPause';
 function ShelterServices() {
   const services = [
     {
-      title: 'Campañas o servicios 1',
+      title: 'Campaña de esterilización',
       description:
-        'Prevención de la sobrepoblación de animales, que es  una de las principales causas de abandono y sufrimiento.',
+        'Prevención de la sobrepoblación animal una de las principales causas de abandono y sufrimiento.',
       image: '',
     },
     {
-      title: 'Campañas o servicios 2',
+      title: 'Hogar de paso y recuperación',
       description:
-        'Prevención de la sobrepoblación de animales, que es  una de las principales causas de abandono y sufrimiento.',
+        'Promoviendo el bienestar de mascotas rescatadas y su integración a familias amorosas',
       image: '',
     },
     {
-      title: 'Campañas o servicios 3',
+      title: 'Rescate y eventos',
       description:
-        'Prevención de la sobrepoblación de animales, que es  una de las principales causas de abandono y sufrimiento.',
+        'Salvando vidas animales en condición de calle y promoviendo una cultura de cuidado animal',
       image: '',
     },
   ];

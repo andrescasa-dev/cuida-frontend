@@ -13,7 +13,7 @@ function HamburgerMenu() {
         {<Icon name="hamburger" />}
       </SheetTrigger>
       <SheetContent className="w-2/4">
-        <div>
+        <div className="pt-8">
           <ul className="flex flex-col gap-8">
             {pages.map(({ href, id, label }) => (
               <li key={id}>
