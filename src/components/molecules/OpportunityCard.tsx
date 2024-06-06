@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import Icon from '@/components/ui/Icon';
 import { Opportunity } from '@/types/necessities';
+import Link from 'next/link';
 
 function OpportunityCard({
   opportunity,
@@ -42,7 +43,7 @@ function OpportunityCard({
   return (
     <article
       className={cn(
-        'bg-muted flex flex-col justify-end rounded-[1.5rem] h-56 border border-border min-w-32 max-sm:max-w-44 sm:h-[17.25rem] lg:h-[22.5rem]',
+        'relative bg-muted flex flex-col justify-end rounded-[1.5rem] h-56 border border-border min-w-32 max-sm:max-w-44 sm:h-[17.25rem] lg:h-[22.5rem]',
         className,
       )}
     >
@@ -81,6 +82,11 @@ function OpportunityCard({
           />
         )}
       </div>
+      <Link
+        className="opacity-0 after:absolute after:inset-0 after:z-10"
+        aria-label="ir a el detalle de la oportunidad"
+        href={`/oportunidades/${shelter.id}`}
+      />
     </article>
   );
 }

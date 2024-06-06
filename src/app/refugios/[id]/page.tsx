@@ -1,6 +1,6 @@
 import CopyButton from '@/components/molecules/CopyButton';
 import OpportunityCard from '@/components/molecules/OpportunityCard';
-import PetCard from '@/components/molecules/PetCard';
+import ModalAdoption from '@/components/organisms/ModalAdoption';
 import Icon from '@/components/ui/Icon';
 import { Button, buttonVariants } from '@/components/ui/button';
 import {
@@ -243,7 +243,7 @@ async function PetsTabContent({ shelterId: shleterId }: { shelterId: string }) {
   return (
     <div className="grid grid-cols-[repeat(auto-fit,_minmax(134px,1fr))] gap-1.5 w-full sm:grid-cols-[repeat(auto-fit,_minmax(208px,1fr))]">
       {pets.map((pet) => (
-        <PetCard key={pet.id} className=" max-w-none w-full" pet={pet} />
+        <ModalAdoption key={pet.id} pet={pet} />
       ))}
     </div>
   );
