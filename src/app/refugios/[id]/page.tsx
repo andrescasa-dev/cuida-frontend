@@ -1,3 +1,4 @@
+import CopyButton from '@/components/molecules/CopyButton';
 import OpportunityCard from '@/components/molecules/OpportunityCard';
 import PetCard from '@/components/molecules/PetCard';
 import Icon from '@/components/ui/Icon';
@@ -14,8 +15,8 @@ import fetchHelper from '@/lib/fetchHelper';
 import { cn, composeUrl } from '@/lib/utils';
 import { PetsResponse } from '@/types/animals';
 import { OpportunitiesResponse } from '@/types/necessities';
-import { ShelterResponse } from '@/types/shelter';
-import { Files, Sparkle } from 'lucide-react';
+import { PaymentGateway, ShelterResponse } from '@/types/shelter';
+import { Sparkle } from 'lucide-react';
 import Image from 'next/image';
 
 async function shelterDetail({ params }: { params: { id: string } }) {
@@ -107,7 +108,7 @@ async function shelterDetail({ params }: { params: { id: string } }) {
               >
                 <Icon
                   name={iconName}
-                  className="size-7 md:size-full md:row-span-2 md:row-start-1"
+                  className="size-7 md:size-full sm:max-lg:hidden md:row-span-2 md:row-start-1"
                 />
                 <dt className="text-xs font-medium md:row-start-1 capitalize">{type}</dt>
                 <dd className="font-bold text-lg md:text-base md:row-start-2">{count}</dd>
@@ -121,7 +122,7 @@ async function shelterDetail({ params }: { params: { id: string } }) {
               </li>
             ))}
           </ul>
-          <div className="flex flex-col w-full  gap-2.5 sm:row-start-2 sm:row-span-2 sm:my-auto sm:h-full sm:justify-center">
+          <div className="flex flex-col w-full gap-2.5 sm:row-start-2 sm:row-span-2 sm:my-auto sm:h-full sm:justify-center">
             <Button asChild>
               <a
                 target="_blank"
@@ -137,32 +138,14 @@ async function shelterDetail({ params }: { params: { id: string } }) {
               <DialogTrigger
                 className={cn(
                   buttonVariants({ variant: 'secondary' }),
-                  'max-w-none lg:hidden',
+                  'max-w-none sm:w-56 lg:hidden sm:ml-auto',
                 )}
               >
                 Ver Pasarelas
               </DialogTrigger>
               <DialogContent>
                 <DialogTitle>Pasarelas</DialogTitle>
-                <ul className="flex flex-col gap-2">
-                  {paymentMethods.map(({ numCuenta: number, metodo: type }) =>
-                    type.toLowerCase() === 'paypal' ? (
-                      <li
-                        key={type}
-                        className="flex gap-2 items-center text-sm capitalize bg-muted rounded-sm py-1"
-                      >
-                        <Files className="size-4" /> {number}
-                      </li>
-                    ) : (
-                      <li
-                        key={type}
-                        className="flex gap-2 items-center text-sm capitalize bg-muted rounded-sm py-1"
-                      >
-                        <Files className="size-4" /> {type} - {number}
-                      </li>
-                    ),
-                  )}
-                </ul>
+                <PaymentMethodsList paymentMethods={paymentMethods} />
               </DialogContent>
             </Dialog>
           </div>
@@ -203,25 +186,7 @@ async function shelterDetail({ params }: { params: { id: string } }) {
         </section>
         <section>
           <h2 className="text-lg font-semibold mb-4">Pasarelas</h2>
-          <ul className="flex flex-col gap-2">
-            {paymentMethods.map(({ numCuenta: number, metodo: type }) =>
-              type.toLowerCase() === 'paypal' ? (
-                <li
-                  key={type}
-                  className="flex gap-2 items-center text-sm capitalize bg-muted rounded-sm py-1"
-                >
-                  <Files className="size-4" /> {number}
-                </li>
-              ) : (
-                <li
-                  key={type}
-                  className="flex gap-2 items-center text-sm capitalize bg-muted rounded-sm py-1"
-                >
-                  <Files className="size-4" /> {type} - {number}
-                </li>
-              ),
-            )}
-          </ul>
+          <PaymentMethodsList paymentMethods={paymentMethods} />
         </section>
         <section>
           <h2 className="text-lg font-semibold mb-4">Contacto</h2>
@@ -243,6 +208,23 @@ async function shelterDetail({ params }: { params: { id: string } }) {
     </div>
   );
 }
+
+const PaymentMethodsList = ({ paymentMethods }: { paymentMethods: PaymentGateway[] }) => {
+  return (
+    <ul className="flex flex-col gap-2">
+      {paymentMethods.map(({ numCuenta: number, metodo: type }) => (
+        <li
+          key={type}
+          className="flex gap-2 items-center text-sm capitalize bg-muted rounded-sm py-1"
+        >
+          <CopyButton text={String(number)}>
+            {type} - ${number}
+          </CopyButton>
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 async function PetsTabContent({ shelterId: shleterId }: { shelterId: string }) {
   const [errorPetsFetch, petsData] = await fetchHelper<PetsResponse>(
