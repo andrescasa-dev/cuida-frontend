@@ -1,11 +1,17 @@
 import OpportunityCard from '@/components/molecules/OpportunityCard';
 import PetCard from '@/components/molecules/PetCard';
 import Icon from '@/components/ui/Icon';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import fetchHelper from '@/lib/fetchHelper';
-import { composeUrl } from '@/lib/utils';
+import { cn, composeUrl } from '@/lib/utils';
 import { PetsResponse } from '@/types/animals';
 import { OpportunitiesResponse } from '@/types/necessities';
 import { ShelterResponse } from '@/types/shelter';
@@ -127,9 +133,38 @@ async function shelterDetail({ params }: { params: { id: string } }) {
                 Donar <Icon aria-hidden={true} name="chevronRight" />
               </a>
             </Button>
-            <Button className="max-w-none lg:hidden" variant={'secondary'}>
-              Ver Pasarelas
-            </Button>
+            <Dialog>
+              <DialogTrigger
+                className={cn(
+                  buttonVariants({ variant: 'secondary' }),
+                  'max-w-none lg:hidden',
+                )}
+              >
+                Ver Pasarelas
+              </DialogTrigger>
+              <DialogContent>
+                <DialogTitle>Pasarelas</DialogTitle>
+                <ul className="flex flex-col gap-2">
+                  {paymentMethods.map(({ numCuenta: number, metodo: type }) =>
+                    type.toLowerCase() === 'paypal' ? (
+                      <li
+                        key={type}
+                        className="flex gap-2 items-center text-sm capitalize bg-muted rounded-sm py-1"
+                      >
+                        <Files className="size-4" /> {number}
+                      </li>
+                    ) : (
+                      <li
+                        key={type}
+                        className="flex gap-2 items-center text-sm capitalize bg-muted rounded-sm py-1"
+                      >
+                        <Files className="size-4" /> {type} - {number}
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </DialogContent>
+            </Dialog>
           </div>
           <div className="lg:hidden flex gap-1.5 sm:row-start-4 lg:justify-self-center">
             {contactMethods.map(({ type, url }) => {
